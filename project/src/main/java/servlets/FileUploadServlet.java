@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import utility.ConfKit;
+import utility.Global;
 
 /**
  * 文件上传
@@ -37,13 +38,9 @@ public class FileUploadServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(getServletContext().getRealPath("."));
 	}
 
-	/*
-	 * use an absolute path
-	 * 
-	 * */
-//	static final String savePath = "G:/MyProject/Java_Eclipse_work/online_album/project/storage/imgs/"; // 使用绝对路径作为文件上传存储路径
+
 	/**
-	 * 使用POST请求处理文件上传操作
+	 *  user upload file
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -51,11 +48,13 @@ public class FileUploadServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
+		//TODO initialize configuration
+		Global.conf_path=request.getServletContext().getRealPath("/system.conf");
+		 
 		// 指定文件上传存储路径
 		 String savePath = null;
-		 String conf_path=request.getServletContext().getRealPath("/system.conf");
-		 ConfKit conf=new ConfKit(conf_path);
-		 savePath=conf.getProperty("imgs");
+		
+		 savePath=ConfKit.getProperty("imgs");
 		 if(savePath==null) {
 			 doGet(request, response);
 			 return;
@@ -74,7 +73,7 @@ public class FileUploadServlet extends HttpServlet {
 			Part part = request.getPart("file");
 
 			/**
-			 * Servlet3没有提供直接获取文件名的方法,需要从请求头中解析出来<br>
+			 * Servlet3没有提供直接获取文件名的方法,需要从请求头中解析出来
 			 * 获取请求头，请求头的格式：form-data; name="file"; filename="snmp4j--api.zip"
 			 */
 			String header = part.getHeader("content-disposition");
@@ -102,7 +101,7 @@ public class FileUploadServlet extends HttpServlet {
 	/**
 	 * 根据请求头解析出上传文件名
 	 * 
-	 * 请求头的格式：<br>
+	 * 请求头的格式：
 	 * 火狐和Google浏览器：form-data; name="file"; filename="abc.jpg" 
 	 * IE浏览器：form-data; name="file"; filename="E:\abc.jpg"
 	 * 

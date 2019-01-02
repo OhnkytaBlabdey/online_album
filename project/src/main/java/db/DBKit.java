@@ -4,14 +4,20 @@ import java.sql.*;
 import java.util.Date;
 import java.util.Random;
 
+import utility.ConfKit;
+import utility.Global;
+
 public final class DBKit {
 	// JDBC 驱动名及数据库 URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-    static final String DB_URL = "jdbc:mysql://localhost:3306/rsp?useSSL=false&serverTimezone=UTC";
+//    static final String DB_URL = "jdbc:mysql://localhost:3306/rsp?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
  
     // 数据库的用户名与密码，需要根据自己的设置
-    static final String USER = "ohnkyta";
-    static final String PW = "[[]]";
+    static String DB_URL=null;
+    static String USER = null;
+    static String PW = null;
+//    static final String USER = null;
+//    static final String PW = null;
     
     static Connection conn = null;
     static Statement stmt = null;
@@ -21,6 +27,9 @@ public final class DBKit {
     static final boolean is_log=false;
     
     static protected void init() {
+    	DB_URL=ConfKit.getProperty("db_url");
+    	USER=ConfKit.getProperty("db_user");
+    	PW=ConfKit.getProperty("db_pw");
         try{
             // 注册 JDBC 驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -119,6 +128,7 @@ public final class DBKit {
     }
     
     public static void main(String[] args) {
+    	Global.conf_path="G:\\MyProject\\Java_Eclipse_work\\online_album\\project\\src\\main\\webapp\\system.conf";
     	Random rnd= new Random();
 		System.out.println("row count"+getRowCount());
 		Insert("name-test", (rnd.nextInt()%10086+10086)%10086, (rnd.nextInt()%3+3)%3-1, -1);

@@ -9,9 +9,9 @@ public final class ConfKit {
 
 	String conf_path;
 	Properties m_properties;
+	static ConfKit confKit;
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 	
@@ -38,7 +38,21 @@ public final class ConfKit {
 
 	}
 	
-	public String getProperty(String key) {
+	Properties getPS() {
+		return m_properties;
+	}
+	static public void init() {
+		if(confKit==null)
+			confKit=new ConfKit(Global.conf_path);
+	}
+	
+	public static String getProperty(String key) {
+		if(confKit==null) init();
+		return confKit.m_getProperty(key);
+	}
+	
+	String m_getProperty(String key) {
+		System.out.println(key + " : "+m_properties.getProperty(key));
 		return m_properties.getProperty(key);
 	}
 
