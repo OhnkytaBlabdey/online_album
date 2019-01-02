@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="./css/Index_css.css">
 </head>
 <body>
+<p>
+"${pageContext.request.contextPath}"
+</p>
     <div id="header" class="clearfix">
         <a href="" class="index">
             <img src="imageSources/blogLogo.jpg" alt="">
