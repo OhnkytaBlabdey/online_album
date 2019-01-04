@@ -1,8 +1,10 @@
 package db;
 
-import java.sql.*;
-import java.util.Date;
-import java.util.Random;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import utility.ConfKit;
 import utility.Global;
@@ -31,14 +33,15 @@ public final class DBKit {
     	USER=ConfKit.getProperty("db_user");
     	PW=ConfKit.getProperty("db_pw");
         try{
-            // connect to JDBC Driver
+            /**
+             *  connect to JDBC Driver
+             */
             Class.forName("com.mysql.cj.jdbc.Driver");
         
             if(is_log)
             System.out.println("Connecting to db "+DB_URL+USER+PW);
             inited=true;
             conn = DriverManager.getConnection(DB_URL,USER,PW);
-//            conn=DriverManager.getConnection(DB_URL+"&user="+USER+"&password="+PASS); //this method is deprecated
             conn.setAutoCommit(true);
             
         }catch (SQLException | ClassNotFoundException e) {
@@ -51,6 +54,7 @@ public final class DBKit {
         }
 	}
     
+    /*
     static protected int getRowCount(String table_name) {
     	if(conn==null) init();
     	
@@ -69,7 +73,12 @@ public final class DBKit {
     	
     	return r;
     }
+    */
     
+    
+    /**
+     * <br>user </br>
+     */
     static public boolean hasUserName(String name) {
     	if(conn==null) init();
     	try {
@@ -106,7 +115,7 @@ public final class DBKit {
 		} 
     }
     
-    static public boolean InsertUser(String name,String pw) {
+    static public boolean insertUser(String name,String nick,String pw) {
     	if(conn==null) init();
     	if(conn==null) {
     		System.out.println("fail open.");
@@ -117,10 +126,11 @@ public final class DBKit {
     		System.err.println("this name has been taken by another user.");
     		return false;
     	}
-    	String sql=" insert into user (name,psw) values ("
+    	String sql=" insert into user (name,psw,nickname) values ("
     	+"'"+name+"',"
     	
-    	+"'"+pw+"'"
+    	+"'"+pw+"',"
+    	+"'"+nick+"'"
     	+");";
     	if(is_log)
     	System.err.println("[insert]\t"+sql);
@@ -139,12 +149,48 @@ public final class DBKit {
     	return true;
     }
     
+    static public String getUserPassword(String name) {
+    	if(conn==null) init();
+    	try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select psw from user where name = '"+name+"';");
+			
+			if(rs.next()) 
+			{
+				String res=rs.getString("psw");
+				rs.close();
+				return res;
+			}
+	    	rs.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} 
+    	
+    	return null;
+    }
+
+    static public boolean deleteUser(String name) {
+    	if(conn==null) init();
+    	try {
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("delete from user where name = '"+name+"';");
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			return false;
+		} 
+    	return true;
+    }
+    
+    
+    /**
+     * <br>album </br>
+     */
+    
     public static void main(String[] args) {
     	Global.conf_path="G:\\MyProject\\Java_Eclipse_work\\online_album\\project\\src\\main\\webapp\\system.conf";
-		System.out.println("row count"+getRowCount("user"));
-		InsertUser("test", "testpw");
+		insertUser("name4","nick" ,"testpw2");
 		listUser();
-		System.out.println("row count"+getRowCount("user"));
+		System.out.println("psw of name4"+getUserPassword("name4"));
 	}
     
 }
