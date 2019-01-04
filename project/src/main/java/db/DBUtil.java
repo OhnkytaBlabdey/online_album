@@ -1,7 +1,11 @@
 package db;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import utility.ConfKit;
+import utility.Global;
 
 public class DBUtil {
 	private static Connection connection=null;
@@ -27,4 +31,9 @@ public class DBUtil {
         }
         return connection;
     }
+    public static void main(String[] args) {
+    	Global.conf_path="G:\\MyProject\\Java_Eclipse_work\\online_album\\project\\src\\main\\webapp\\system.conf";
+    	
+    	getConnection();
+	}
 }
