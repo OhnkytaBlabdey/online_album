@@ -23,7 +23,7 @@ body {
 				<div class="card bg-light mb-3">
 					<div class="card-header">上传单个文件</div>
 					<div class="card-body">
-						<form action="./upload"
+						<form action="<%= request.getContextPath()%>/upload"
 							method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<input type="file" name="file" class="form-control-file">
@@ -31,7 +31,7 @@ body {
 
 							<div class="form-group">
 								<input class="btn btn-secondary btn-block" type="submit"
-									value="上 传">
+									value="上 传 ">
 							</div>
 						</form>
 					</div>
@@ -42,7 +42,7 @@ body {
 				<div class="card bg-light border-info mb-3">
 					<div class="card-header">上传多个文件</div>
 					<div class="card-body">
-						<form action="./upload"
+						<form action="<%= request.getContextPath()%>/upload"
 							method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<input type="file" name="file1" class="form-control-file">

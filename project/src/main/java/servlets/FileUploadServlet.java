@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import utility.ConfKit;
+import utility.Global;
+
 /**
  * 文件上传
  * 
@@ -32,16 +35,12 @@ public class FileUploadServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(getServletContext().getRealPath("."));
 	}
 
-	/*
-	 * use an absolute path
-	 * 
-	 * */
-	static final String savePath = "G:/MyProject/Java_Eclipse_work/online_album/project/storage/imgs/"; // 使用绝对路径作为文件上传存储路径
+
 	/**
-	 * 使用POST请求处理文件上传操作
+	 *  user upload file
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -49,8 +48,17 @@ public class FileUploadServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
+		//TODO initialize configuration
+		Global.conf_path=request.getServletContext().getRealPath("/system.conf");
+		 
 		// 指定文件上传存储路径
-//		 String savePath =	 request.getServletContext().getRealPath("../../../storage/imgs/");
+		 String savePath = null;
+		
+		 savePath=ConfKit.getProperty("imgs");
+		 if(savePath==null) {
+			 doGet(request, response);
+			 return;
+		 }
 
 		
 		// 获取上传的文件集合
@@ -58,14 +66,14 @@ public class FileUploadServlet extends HttpServlet {
 
 		if (parts.size() == 1) { // 上传单个文件
 			/**
-			 * Servlet 3.0将 multipart/form-data 的POST请求封装成Part，通过Part对上传的文件进行操作<br>
-			 * Part part = parts[0]; 从上传的文件集合中获取Part对象<br>
+			 * Servlet 3.0将 multipart/form-data 的POST请求封装成Part，通过Part对上传的文件进行操作
+			 * Part part = parts[0]; 从上传的文件集合中获取Part对象
 			 * 通过表单file控件(<input type="file" name="file">)的名字直接获取Part对象
 			 */
 			Part part = request.getPart("file");
 
 			/**
-			 * Servlet3没有提供直接获取文件名的方法,需要从请求头中解析出来<br>
+			 * Servlet3没有提供直接获取文件名的方法,需要从请求头中解析出来
 			 * 获取请求头，请求头的格式：form-data; name="file"; filename="snmp4j--api.zip"
 			 */
 			String header = part.getHeader("content-disposition");
@@ -93,8 +101,8 @@ public class FileUploadServlet extends HttpServlet {
 	/**
 	 * 根据请求头解析出上传文件名
 	 * 
-	 * 请求头的格式：<br>
-	 * 火狐和Google浏览器：form-data; name="file"; filename="abc.jpg" <br>
+	 * 请求头的格式：
+	 * 火狐和Google浏览器：form-data; name="file"; filename="abc.jpg" 
 	 * IE浏览器：form-data; name="file"; filename="E:\abc.jpg"
 	 * 
 	 * @param header 请求头
