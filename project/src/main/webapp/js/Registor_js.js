@@ -36,7 +36,7 @@ function checkUserName(target) {
 }
 //判断密码是否符合规范
 function checkPassword(target){
-    let reg = new RegExp("^。{6,10}$");
+    let reg = new RegExp("^.{6,10}$");
     let targe_temp = target[0];
     if(!reg.test(targe_temp.value) || targe_temp.value == ""){
         target.css("border-style","solid").css("border-width","3px").css("border-color","red");
@@ -47,7 +47,7 @@ function checkPassword(target){
 //判断确认密码是否相同
 function checkPassword_repeat(target) {
     let password_temp = $("#password");
-    if(password_temp.value == target.value){
+    if(password_temp.value == target[0].value){
         target.css("border-style","solid").css("border-width","3px").css("border-color","red");
     }else{
         target.css("border-style","solid").css("border-width","3px").css("border-color","green");
