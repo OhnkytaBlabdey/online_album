@@ -4,8 +4,8 @@ import db.DBUtil;
 import po.User;
 import java.sql.*;
 
-/***
- * 处理用户表的查询等操作
+/**
+ *c 处理用户表的查询等操作
  */
 
 public class UserDao {
@@ -15,7 +15,7 @@ public class UserDao {
     String sql = null;
     Connection connection = null;
     /**
-     * 关闭各种资源(使用resultset)
+     * c  关闭各种资源(使用resultset)
      */
     public void closeParaResources(){
         try {
@@ -35,7 +35,7 @@ public class UserDao {
         }
     }
     /**
-     * 关闭资源(未使用resultset)
+     *c 关闭资源(未使用resultset)
      */
     public void closeResources(){
         try {
@@ -50,7 +50,7 @@ public class UserDao {
         }
     }
     /**
-     * 通过用户名查询
+     *c 通过用户名查询
      * */
     public User findByUserName(String username){
         connection = DBUtil.getConnection();
@@ -71,7 +71,7 @@ public class UserDao {
         return user;
     }
     /**
-     * 注册服务
+     * c注册服务
      */
     public void addUser(User user){
         connection = DBUtil.getConnection();

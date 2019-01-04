@@ -14,7 +14,11 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "UserServlet")
 public class UserServlet extends HttpServlet {
-    UserService userService = new UserService();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	UserService userService = new UserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
