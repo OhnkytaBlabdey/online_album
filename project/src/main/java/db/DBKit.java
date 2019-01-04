@@ -13,6 +13,7 @@ public final class DBKit {
 	// JDBC
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
  
+
     // user and password for database
     static String DB_URL=null;
     static String USER = null;
