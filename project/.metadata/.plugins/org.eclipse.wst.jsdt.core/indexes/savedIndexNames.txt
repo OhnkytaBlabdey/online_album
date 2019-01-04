@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+E:\online_album\project\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3617799135.index
+4032968255.index
+1284258988.index
+1275656273.index
+2035928603.index
+1808904568.index

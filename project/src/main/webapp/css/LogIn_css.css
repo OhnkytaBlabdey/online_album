@@ -51,7 +51,7 @@
     position: absolute;
     z-index: 2;
     left:58%;
-    top:0;
+    top:-60px;
     visibility: visible;
 }
 #container .body  .left_2{
@@ -64,7 +64,7 @@
     position: absolute;
     z-index: 3;
     left:58%;
-    top:0;
+    top:-60px;
     visibility: hidden;
 }
 #container .body .right{

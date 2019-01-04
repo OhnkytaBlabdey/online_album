@@ -10,8 +10,11 @@ public final class DBKit {
     static final String DB_URL = "jdbc:mysql://localhost:3306/rsp?useSSL=false&serverTimezone=UTC";
  
     // 数据库的用户名与密码，需要根据自己的设置
-    static final String USER = "ohnkyta";
-    static final String PW = "[[]]";
+//    static final String USER = "ohnkyta";
+//    static final String PW = "[[]]";
+
+	static final String USER = "root";
+	static final String PW = "root";
     
     static Connection conn = null;
     static Statement stmt = null;
