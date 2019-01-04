@@ -4,7 +4,7 @@ public class DBUtil {
     private static String username = "root";
     private static String password = "root";
     private static String drivername = "com.mysql.cj.jdbc.Driver";
-    private static String url = "jdbc:mysql://localhost:3306/online_album?userSSL=true&serverTimezone=GMT";
+    private static String url = "jdbc:mysql://localhost:3306/online_album?userSSL=true&serverTimezone=UTC";
 
     public static Connection getConnection(){
         try {
