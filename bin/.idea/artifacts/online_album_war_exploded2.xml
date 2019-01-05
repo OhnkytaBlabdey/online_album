@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="online_album:war exploded2">
+    <output-path>$PROJECT_DIR$/out/artifacts/online_album_war_exploded2</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="online_album" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="online_album/web/Web" />
+    </root>
+  </artifact>
+</component>

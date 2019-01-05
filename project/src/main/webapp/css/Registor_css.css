@@ -1,0 +1,107 @@
+#header{
+    width: 100%;
+    height: 50px;
+    background: black;
+    opacity: 0.6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:3;
+}
+#header .index{
+    margin: 0 90px;
+}
+#header .index img{
+    margin: 0 10px;
+}
+#header .index img{
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+#header .index span{
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    vertical-align: middle;
+}
+#header .login{
+    float: right;
+    margin: 0 90px;
+}
+#header .login span{
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    vertical-align: middle;
+    line-height: 50px;
+}
+#container{
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: black url("../imageSources/LogIn_background.jpg") no-repeat;
+    padding: 180px 0 0 0;
+    overflow: hidden;
+}
+#container .body{
+    width: 50%;
+    /*height: 60%;*/
+    margin: 0 auto;
+    background: black;
+    padding: 10px;
+    opacity: 0.7;
+}
+#container .body .form{
+    margin: 20px;
+}
+#container .body form input{
+    margin:35px 25px;
+}
+#container .body form .input{
+    border-radius: 5px;
+    width: 325px;
+    height: 45px;
+    font-size: 16px;
+    padding: 0 10px;
+    outline: none;
+    border-radius: 5px;
+}
+#container .body form .submit{
+    font-size: 15px;
+    width:100px;
+    height:40px;
+    border: 0;
+    background: white;
+    letter-spacing: 5px;
+    border-radius: 5px;
+}
+#container .body .form .sel{
+    display: inline-block;
+    position: relative;
+}
+#container .body .form .sel span{
+    color: white;
+    font-size: 16px;
+}
+#container .body .form .pic{
+    display: inline-block;
+    position: absolute;
+    border-top: 16px orange solid;
+    border-bottom: 16px transparent solid;
+    border-left: 16px transparent solid;
+    border-right: 16px transparent solid;
+    left:-30px;
+    top:6px;
+}
+#container .body .form .pic:after{
+    display: inline-block;
+    position: absolute;
+    border-top: 16px transparent solid;
+    border-bottom: 16px orange solid;
+    border-left: 16px transparent solid;
+    border-right: 16px transparent solid;
+    content: " ";
+    left:-16px;
+    top:-37px;
+}
