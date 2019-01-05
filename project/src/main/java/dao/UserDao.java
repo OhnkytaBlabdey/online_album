@@ -54,7 +54,7 @@ public class UserDao {
      * */
     public User findByUserName(String username){
         connection = DBUtil.getConnection();
-        sql = "select username,password,nickname from user where username = ?";
+        sql = "select name,psw,nickname from user where name = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
@@ -75,7 +75,7 @@ public class UserDao {
      */
     public void addUser(User user){
         connection = DBUtil.getConnection();
-        sql = "insert into user (username,password,nickname) values(?,?,?)";
+        sql = "insert into user (name,psw,nickname) values(?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getUserName());

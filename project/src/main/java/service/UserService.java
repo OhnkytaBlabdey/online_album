@@ -31,12 +31,10 @@ public class UserService {
     public String registorService(User user){
         User user_temp = findByUserNameService(user.getUserName());
         System.out.println(user_temp);
-//        if((null != user_temp) || (null != user_temp.getUserName())){
-//            return "username_exist";
-//        }else{
-//            userDao.addUser(user);
-//            return "success";
-//        }
+
         return "success";
     }
+    public static void main(String[] args) {
+		System.out.println(new UserService().findByUserNameService("name4").getNickName());
+	}
 }
