@@ -53,7 +53,6 @@ public class FileUploadServlet extends HttpServlet {
 		 
 		// 指定文件上传存储路径
 		 String savePath = null;
-		
 		 savePath=ConfKit.getProperty("imgs");
 		 if(savePath==null) {
 			 doGet(request, response);

@@ -1,6 +1,6 @@
 package utility;
 
-import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,7 +17,7 @@ public final class ConfKit {
 	}
 	
 	public ConfKit(String path) {
-		conf_path=path;
+		conf_path=new File(path).getAbsolutePath();
 		FileReader f_conf=null;
 		m_properties=new Properties();
 		try {
@@ -53,7 +53,8 @@ public final class ConfKit {
 	}
 	
 	String m_getProperty(String key) {
-		System.out.println(key + " : "+m_properties.getProperty(key));
+		if(Global.is_log)
+			System.err.println(key + " : "+m_properties.getProperty(key));
 		return m_properties.getProperty(key);
 	}
 

@@ -1,17 +1,17 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import db.DBUtil;
-import po.User;
-import java.sql.*;
+import po.Album;
 
-/**
- *c 处理用户表的查询等操作
- */
-
-public class UserDao {
-    private PreparedStatement preparedStatement = null;
+public class AlbumDao {
+	private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    User user = new User();
+    Album album = new Album();
     String sql = null;
     Connection connection = null;
     /**
@@ -52,42 +52,43 @@ public class UserDao {
     /**
      *c 通过用户名查询
      * */
-    public User findByUserName(String username){
+    public Album findByAlbumName(String album_name){
         connection = DBUtil.getConnection();
-        sql = "select name,psw,nickname from user where name = ?";
+        sql = "select name,userid from album where name = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, username);
+            preparedStatement.setString(1, album_name);
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                user.setUserName(resultSet.getString(1));
-                user.setPassword(resultSet.getString(2));
-                user.setNickName(resultSet.getString(3));
+            	album.setName(resultSet.getString("name"));
+            	album.setUserid(resultSet.getInt("useid"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         closeParaResources();
-        return user;
+        return album;
     }
     /**
      * c注册服务
      */
-    public void addUser(User user){
+    public void addAlbum(Album album_t){
         connection = DBUtil.getConnection();
-        sql = "insert into user (name,psw,nickname) values(?,?,?)";
+        sql = "insert into album (name,userid) values(?,?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, user.getUserName());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getNickName());
+            preparedStatement.setString(1, album_t.getName());
+            preparedStatement.setInt(2, album_t.getUserid());
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         closeResources();
     }
-    /**
-     *
-     */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+	}
+
 }
