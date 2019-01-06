@@ -62,21 +62,3 @@ function moveToRight() {
         return;
     }
 }
-
-imageContent.mouseover(function(){
-    timeLock = false;
-});
-imageContent.mouseout(function(){
-    timeLock = true;
-});
-
-// function countTime(){
-//     setInterval(function(){
-//         console.log(1);
-//         if(timeLock){
-//             moveToLeft();
-//             console.log(2);
-//         }
-//     }, 1000);
-// }
-// document.onload(countTime());

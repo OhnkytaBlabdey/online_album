@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>LogIn</title>
@@ -14,7 +15,7 @@
 </head>
 <body>
     <div id="header">
-        <a href="" class="index">
+        <a href="${pageContext.request.contextPath}/Index.jsp" class="index">
             <img src="imageSources/blogLogo.jpg" alt="">
             <span>主站</span>
         </a>
@@ -27,11 +28,11 @@
                 <div class="content">
                     <div class="right_sel title_part"><span class="title">登陆</span></div>
                     <div class="right_sel form_part">
-                        <form action="http://www.bilibili.com" method="post" id="logInForm" onsubmit="return isValid()">
+                        <form action="${pageContext.request.contextPath}/UserServlet?method=login" method="post" id="logInForm" onsubmit="return isValid()">
                             <input type="text" name="username" id="username" class="part input" placeholder="请输入用户名">
                             <input type="password" name="password" id="password" class="part input" placeholder="请输入密码">
                             <div class="registor">
-                                <a href="#" class="part">点我注册</a>
+                                <a href="${pageContext.request.contextPath}/Registor.jsp" class="part">点我注册</a>
                             </div>
                             <input type="submit" id="submit" class="part submit" value="登陆">
                         </form>

@@ -5,6 +5,7 @@ function isValid() {
     console.log(userName.value);
     console.log(password.value);
     if(userName.value == "" || password.value == "" || userName.value == " "|| password.value == " "){
+        alert("用户名或密码为空");
         return false;
     }
     return true;
