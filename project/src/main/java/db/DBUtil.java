@@ -12,6 +12,7 @@ public class DBUtil {
 	private static String username = null;
     private static String password = null;
     private static String drivername = "com.mysql.cj.jdbc.Driver";
+
     private static String url = null;
 
     public static Connection getConnection(){
