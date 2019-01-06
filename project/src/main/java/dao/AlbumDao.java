@@ -9,11 +9,32 @@ import db.DBUtil;
 import po.Album;
 
 public class AlbumDao {
-	private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+	}
     Album album = new Album();
-    String sql = null;
     Connection connection = null;
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
+    String sql = null;
+    /**
+     * c注册服务
+     */
+    public void addAlbum(Album album_t){
+        connection = DBUtil.getConnection();
+        sql = "insert into album (name,userid) values(?,?)";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, album_t.getName());
+            preparedStatement.setInt(2, album_t.getUserid());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeResources();
+    }
     /**
      * c  关闭各种资源(使用resultset)
      */
@@ -49,7 +70,7 @@ public class AlbumDao {
             e.printStackTrace();
         }
     }
-    /**
+	/**
      *c 通过用户名查询
      * */
     public Album findByAlbumName(String album_name){
@@ -69,26 +90,5 @@ public class AlbumDao {
         closeParaResources();
         return album;
     }
-    /**
-     * c注册服务
-     */
-    public void addAlbum(Album album_t){
-        connection = DBUtil.getConnection();
-        sql = "insert into album (name,userid) values(?,?)";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, album_t.getName());
-            preparedStatement.setInt(2, album_t.getUserid());
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        closeResources();
-    }
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-
-	}
 
 }

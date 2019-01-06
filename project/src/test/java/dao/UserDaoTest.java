@@ -1,9 +1,8 @@
 package dao;
 
 import org.junit.Test;
-import po.User;
 
-import static org.junit.Assert.*;
+import po.User;
 
 public class UserDaoTest {
     User user = new User();
