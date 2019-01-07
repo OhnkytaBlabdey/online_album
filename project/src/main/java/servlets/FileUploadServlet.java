@@ -49,7 +49,8 @@ public class FileUploadServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 
 		//TODO initialize configuration
-		Global.conf_path=request.getServletContext().getRealPath("/system.conf");
+		Global.conf_path=request.getServletContext().getRealPath("./WEB-INF/classes/system.conf");
+//		Global.conf_path="./system.conf";
 		 
 		// 指定文件上传存储路径
 		 String savePath = null;
