@@ -32,17 +32,13 @@ public class ImageServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Global.conf_path=request.getServletContext().getRealPath("./WEB-INF/classes/system.conf");
 		// 可以从请求字符串中获取要显示的图片名
-		String imgId = (String) request.getAttribute("id");
-		PrintWriter out=response.getWriter();
+		String imgId = (String) request.getParameter("id");
+//		PrintWriter out=response.getWriter();
 		// 查询数据库获得完整的图片路径（此处临时拼凑一个）
 		String imgPath = ConfKit.getProperty("imgs") + imgId + ".jpg"; 
+		imgPath=getServletContext().getRealPath(imgPath);
 		if (null != imgPath && !"".equals(imgPath.trim())) {
-			try {
 			ImageUtil.showImage(response, imgPath, true);
-			}catch (Exception e) {
-				// TODO: handle exception
-//				e.printStackTrace(out);
-			}
 		}
 	}
 }
