@@ -61,6 +61,7 @@ public class FileUploadServlet extends HttpServlet {
 		// 指定文件上传存储路径
 		 String savePath = null;
 		 savePath=ConfKit.getProperty("imgs");
+		 savePath=getServletContext().getRealPath(savePath);
 		 if(savePath==null) {
 			 doGet(request, response);
 			 return;
@@ -99,14 +100,15 @@ public class FileUploadServlet extends HttpServlet {
 		}
 
 //		PrintWriter out = response.getWriter();
-		out.println("文件上传成功！");
-		out.flush();
-		out.close();
+		out.println("文件上传结束");
+		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace(out);
 		} catch (ServletException e) {
 			e.printStackTrace(out);
 		}
+		out.flush();
+		out.close();
 	}
 
 	/**

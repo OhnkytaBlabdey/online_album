@@ -15,16 +15,9 @@
     <servlet-name>UserServlet</servlet-name>
     <servlet-class>servlets.UserServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>UserServlet</servlet-name>
-    <url-pattern>/user</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <servlet-name>ImageServlet</servlet-name>
     <servlet-class>servlets.ImageServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>ImageServlet</servlet-name>
-    <url-pattern>/image</url-pattern>
-  </servlet-mapping>
 </web-app>

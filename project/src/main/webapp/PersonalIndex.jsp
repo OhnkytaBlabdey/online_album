@@ -11,6 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-<img alt="img "src="/image?id=10">
+<%
+request.setAttribute("id", "10");
+%>
+<img alt="img "src="./image">
 </body>
 </html>

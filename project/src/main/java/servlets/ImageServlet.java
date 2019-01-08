@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,16 +32,16 @@ public class ImageServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Global.conf_path=request.getServletContext().getRealPath("./WEB-INF/classes/system.conf");
 		// 可以从请求字符串中获取要显示的图片名
-		String imgId = request.getParameter("id");
-		
+		String imgId = (String) request.getAttribute("id");
+		PrintWriter out=response.getWriter();
 		// 查询数据库获得完整的图片路径（此处临时拼凑一个）
-		String imgPath = ConfKit.getProperty("img") + imgId + ".jpg"; 
+		String imgPath = ConfKit.getProperty("imgs") + imgId + ".jpg"; 
 		if (null != imgPath && !"".equals(imgPath.trim())) {
 			try {
 			ImageUtil.showImage(response, imgPath, true);
 			}catch (Exception e) {
 				// TODO: handle exception
-				e.printStackTrace(response.getWriter());
+//				e.printStackTrace(out);
 			}
 		}
 	}

@@ -25,7 +25,7 @@ public class ImageUtil {
 		try {
 			ServletOutputStream outStream = response.getOutputStream();// 得到向客户端输出二进制数据的对象
 			FileInputStream fis = new FileInputStream(path); // 以byte流的方式打开文件
-			byte data[] = new byte[1000];
+			byte data[] = new byte[4096];
 			while (fis.read(data) > 0) {
 				outStream.write(data);
 			}

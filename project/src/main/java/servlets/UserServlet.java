@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "UserServlet")
+@WebServlet(name = "user")
 public class UserServlet extends HttpServlet {
     /**
 	 * 
