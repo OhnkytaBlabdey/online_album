@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-
+<img alt="img "src="/image?id=10">
 </body>
 </html>

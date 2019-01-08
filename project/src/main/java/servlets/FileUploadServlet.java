@@ -3,6 +3,7 @@ package servlets;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -41,12 +42,17 @@ public class FileUploadServlet extends HttpServlet {
 
 	/**
 	 *  user upload file
+	 * @throws IOException 
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
+			{
 		request.setCharacterEncoding("utf-8");
+		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		try {
+			
 
 		//TODO initialize configuration
 		Global.conf_path=request.getServletContext().getRealPath("./WEB-INF/classes/system.conf");
@@ -92,10 +98,15 @@ public class FileUploadServlet extends HttpServlet {
 			}
 		}
 
-		PrintWriter out = response.getWriter();
+//		PrintWriter out = response.getWriter();
 		out.println("文件上传成功！");
 		out.flush();
 		out.close();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace(out);
+		} catch (ServletException e) {
+			e.printStackTrace(out);
+		}
 	}
 
 	/**
