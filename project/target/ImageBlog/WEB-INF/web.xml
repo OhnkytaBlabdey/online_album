@@ -10,4 +10,14 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/UserServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>ImagesServlet</description>
+    <display-name>ImagesServlet</display-name>
+    <servlet-name>ImagesServlet</servlet-name>
+    <servlet-class>servlets.ImagesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ImagesServlet</servlet-name>
+    <url-pattern>/ImagesServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

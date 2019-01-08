@@ -8,15 +8,13 @@ import utility.ConfKit;
 import utility.Global;
 
 public class DBUtil {
-	private static Connection connection=null;
 	private static String username = null;
     private static String password = null;
     private static String drivername = "com.mysql.cj.jdbc.Driver";
 
     private static String url = null;
 
-    public static Connection getConnection(){
-    	if(connection!=null) return connection;
+    public static Connection getConnection() throws SQLException {
         try {
         	username=ConfKit.getProperty("db_user");
         	password=ConfKit.getProperty("db_pw");
@@ -25,16 +23,6 @@ public class DBUtil {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try {
-            connection= DriverManager.getConnection(url, username, password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return connection;
+        return  DriverManager.getConnection(url, username, password);
     }
-    public static void main(String[] args) {
-    	Global.conf_path="G:\\MyProject\\Java_Eclipse_work\\online_album\\project\\src\\main\\webapp\\system.conf";
-    	
-    	getConnection();
-	}
 }

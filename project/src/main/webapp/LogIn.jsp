@@ -15,7 +15,7 @@
 </head>
 <body>
     <div id="header">
-        <a href="${pageContext.request.contextPath}/Index.jsp" class="index">
+        <a href="${pageContext.request.contextPath}/index.jsp" class="index">
             <img src="imageSources/blogLogo.jpg" alt="">
             <span>主站</span>
         </a>

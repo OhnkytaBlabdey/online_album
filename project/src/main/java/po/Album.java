@@ -1,30 +1,62 @@
 package po;
 
+import java.util.ArrayList;
+
 public class Album {
 
-	private String name;
+
 	private int userid;
-	
+	private int id;
+	private String name;
+	ArrayList<Photo> photos = new ArrayList<Photo>();
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	private String userName;
+
 	public Album() {
 	}
-	public Album(int userid, String name){
-
+	public Album(int id,int userid, String name){
+		this.id = id;
 		this.userid=userid;
 		this.name=name;
 	}
-	public String getName() {
-		return name;
+	public Album(int userid, String name){
+		this.userid=userid;
+		this.name=name;
 	}
-	
-	public int getUserid() {
-		return userid;
-	}
-
 
 	public void setAlbumInfo(int userid, String name){
-
 		this.userid=userid;
 		this.name=name;
+	}
+
+	public ArrayList<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(ArrayList<Photo> photos) {
+		this.photos = photos;
+	}
+
+	@Override
+	public String toString() {
+		return "Album{" +
+				"userid=" + userid +
+				", id=" + id +
+				", name='" + name + '\'' +
+				", photos=" + photos +
+				'}';
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
@@ -35,12 +67,13 @@ public class Album {
 		this.userid = userid;
 	}
 
-	@Override
-	public String toString() {
-		 return "Album{" +
-	                "userid='" + userid + '\'' +
-	                ", name='" + name + '\'' +
-	                '}';
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

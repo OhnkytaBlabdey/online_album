@@ -32,6 +32,8 @@ public class UserServlet extends HttpServlet {
             logIn(request, response);
         } else if (method.equals("register")) {
             register(request, response);
+        } else if(method.equals("logout")){
+            logOut(request, response);
         }
     }
 
@@ -60,7 +62,7 @@ public class UserServlet extends HttpServlet {
             out.print("<script>"
                     + "window.location.href='"
                     + request.getContextPath()
-                    + "/Index.jsp';"
+                    + "/index.jsp';"
                     + "</script>");
         }
     }
@@ -88,5 +90,15 @@ public class UserServlet extends HttpServlet {
 
     }
 
+    protected void logOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        session.removeAttribute("userInfo");
+        PrintWriter out = response.getWriter();
+        out.print("<script>"
+                + "window.location.href='"
+                + request.getContextPath()
+                + "/index.jsp';"
+                + "</script>");
+    }
 
-}
+    }

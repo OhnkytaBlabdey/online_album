@@ -20,4 +20,5 @@
     <servlet-name>ImageServlet</servlet-name>
     <servlet-class>servlets.ImageServlet</servlet-class>
   </servlet>
+
 </web-app>
