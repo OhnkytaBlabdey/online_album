@@ -42,9 +42,6 @@
 #header .logout{
     float: right;
 }
-#header .before_login{
-    display: none;
-}
 #header .info{
     float: right;
 }
