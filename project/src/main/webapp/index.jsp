@@ -48,8 +48,8 @@
 				<%--模块--%>
 				<c:set var="location" value="0"/>
 				<c:forEach begin="${location}" end="${location+4}" step="1">
-					<%
-						String
+					<%!
+
 					%>
 					<div class="content clearfix">
 						<div class="left">

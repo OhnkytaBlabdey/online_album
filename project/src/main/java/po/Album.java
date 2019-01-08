@@ -76,4 +76,9 @@ public class Album {
 		this.id = id;
 	}
 
+	public int getUserid() {
+		// TODO Auto-generated method stub
+		return userid;
+	}
+
 }
