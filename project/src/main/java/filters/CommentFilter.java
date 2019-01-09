@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import service.UserService;
+import utility.Global;
 
 /**
  * Servlet Filter implementation class CommentFilter
@@ -43,6 +44,11 @@ public class CommentFilter implements Filter {
 		if(username!=null) { // validate
 			;
 			// check if user name exists in database
+			if(!Global.inited)
+			{
+				Global.conf_path=request.getServletContext().getRealPath(Global.conf);
+				Global.inited=true;
+			}
 			UserService userService=new UserService();
 			if(userService.findByUserNameService(username) != null) {
 				chain.doFilter(request, response);
