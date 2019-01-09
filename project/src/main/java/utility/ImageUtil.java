@@ -3,6 +3,8 @@ package utility;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -21,19 +23,19 @@ public class ImageUtil {
 	 * @param path
 	 * @param isResponseClose
 	 */
-	public static void showImage(HttpServletResponse response, String path, boolean isResponseClose) {
+	public static void showImage(HttpServletResponse response,OutputStream out, String path, boolean isResponseClose) {
 		try {
-			ServletOutputStream outStream = response.getOutputStream();// 得到向客户端输出二进制数据的对象
+//			ServletOutputStream outStream = response.getOutputStream();// 得到向客户端输出二进制数据的对象
 			FileInputStream fis = new FileInputStream(path); // 以byte流的方式打开文件
 			byte data[] = new byte[4096];
 			while (fis.read(data) > 0) {
-				outStream.write(data);
+				out.write(data);
 			}
 			fis.close();
 			response.setContentType("image/*"); // 设置返回的文件类型
-			outStream.write(data); // 输出数据
+			out.write(data); // 输出数据
 			if (isResponseClose) {
-				outStream.close();
+				out.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -70,12 +72,12 @@ public class ImageUtil {
 	 * @param imgType
 	 * @param isResponseClose
 	 */
-	public static void showImage(HttpServletResponse response, BufferedImage image, String imgType,
+	public static void showImage(OutputStream out, BufferedImage image, String imgType,
 			boolean isResponseClose) {
 		try {
-			ImageIO.write(image, imgType, response.getOutputStream());
+			ImageIO.write(image, imgType, out);
 		} catch (IOException e) {
-			e.printStackTrace();
+			e.printStackTrace(new PrintStream(out));
 		}
 	}
 
