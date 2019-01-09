@@ -31,9 +31,7 @@ public class ImagesServlet extends HttpServlet {
         int location = Integer.parseInt(request.getParameter("location"));
         if(method.equals("findall")){
             albumArrayList = albumService.findAllAlbums(location);
-
             session.setAttribute("albumArrayList", albumArrayList);
-            System.out.println(albumArrayList);
             out.print("<script>"
                     + "window.location.href='"
                     + request.getContextPath()

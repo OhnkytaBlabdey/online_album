@@ -1,3 +1,5 @@
+<%@ page import="po.Album" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -46,17 +48,23 @@
 					<h2>随便看看</h2>
 				</div>
 				<%--模块--%>
-				<c:set var="location" value="0"/>
-				<c:forEach begin="${location}" end="${location+4}" step="1">
+				<%
+					ArrayList<Album> albumArrayList = new ArrayList<>();
+					if(session.getAttribute("albumArrayList") != null) {
+					    albumArrayList = (ArrayList<Album>) session.getAttribute("albumArrayList");
+					    int location_temp = 0;
+					}
+				%>
+				<c:forEach var="location" begin="0" end="<%=albumArrayList.size()-1%>" step="1">
 					<%
-						String
+						Album album = albumArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location"))));
 					%>
 					<div class="content clearfix">
 						<div class="left">
 							<div class="img">
 								<img src="imageSources/after_login.jpg" alt="">
 							</div>
-							<div class="name"><span>李狗蛋</span></div>
+							<div class="name"><span><%=albumArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location")))).getUserName()%></span></div>
 						</div>
 						<div class="right">
 							<div class="img_title">

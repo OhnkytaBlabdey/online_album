@@ -7,17 +7,28 @@ public class Album {
 	private int userid;
 	private int id;
 	private String name;
+	private String userName;
+
 	ArrayList<Photo> photos = new ArrayList<Photo>();
 
 	public String getUserName() {
 		return userName;
 	}
 
+	@Override
+	public String toString() {
+		return "Album{" +
+				"userid=" + userid +
+				", id=" + id +
+				", name='" + name + '\'' +
+				", photos=" + photos +
+				", userName='" + userName + '\'' +
+				'}';
+	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-	private String userName;
 	public Album() {
 	}
 	public Album(int id,int userid, String name){
@@ -40,16 +51,6 @@ public class Album {
 
 	public void setPhotos(ArrayList<Photo> photos) {
 		this.photos = photos;
-	}
-
-	@Override
-	public String toString() {
-		return "Album{" +
-				"userid=" + userid +
-				", id=" + id +
-				", name='" + name + '\'' +
-				", photos=" + photos +
-				'}';
 	}
 
 	public String getName() {

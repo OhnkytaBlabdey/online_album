@@ -134,6 +134,10 @@ public class AlbumDao {
                 album.setId(resultSet.getInt(1));
                 album.setUserid(resultSet.getInt(2));
                 album.setName(resultSet.getString(3));
+
+                /**
+                 * 查询图片
+                 */
                 sql = "select albumid,photopath from photo where albumid = ?";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, (album.getId()));
@@ -142,6 +146,18 @@ public class AlbumDao {
                 while(resultSet_temp.next()){
                     Photo photo = new Photo(Integer.parseInt(resultSet.getString(1)), resultSet.getString(2));
                     photoArrayList.add(photo);
+                }
+                /**
+                 * 查询用户ID
+                 */
+                sql = "select username from user where id = ?";
+                preparedStatement = connection.prepareStatement(sql);
+                System.out.println(album.getUserid());
+                preparedStatement.setInt(1, album.getUserid());
+                ResultSet resultSet_temp = preparedStatement.executeQuery();
+                if(resultSet_temp.next()){
+                    System.out.println(resultSet_temp.getString(1));
+                    album.setUserName(resultSet_temp.getString(1));
                 }
                 album.setPhotos(photoArrayList);
                 albumArrayList.add(album);
