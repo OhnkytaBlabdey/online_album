@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Album {
 
+
 	private int userid;
 	private int id;
 	private String name;
@@ -29,6 +30,7 @@ public class Album {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public Album() {
 	}
 	public Album(int id,int userid, String name){
@@ -40,6 +42,7 @@ public class Album {
 		this.userid=userid;
 		this.name=name;
 	}
+
 	public void setAlbumInfo(int userid, String name){
 		this.userid=userid;
 		this.name=name;
@@ -61,13 +64,10 @@ public class Album {
 		this.name = name;
 	}
 
-	public int getUserid() {
-		return userid;
-	}
-
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
+
 
 	public int getId() {
 		return id;
@@ -76,4 +76,10 @@ public class Album {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public int getUserid() {
+		// TODO Auto-generated method stub
+		return userid;
+	}
+
 }
