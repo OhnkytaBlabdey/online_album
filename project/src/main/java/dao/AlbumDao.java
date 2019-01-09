@@ -11,11 +11,13 @@ import po.Album;
 import po.Photo;
 
 public class AlbumDao {
+
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private ResultSet resultSet_temp = null;
     String sql = null;
     Connection connection = null;
+
 
     /**
      * c  关闭各种资源(使用resultset)
@@ -58,6 +60,7 @@ public class AlbumDao {
      * c 通过用户名查询
      */
     public Album findByAlbumName(String album_name) {
+
         sql = "select name,userid from album where name = ?";
         Album album = new Album();
         try {
@@ -74,6 +77,7 @@ public class AlbumDao {
         closeParaResources();
         return album;
     }
+
 
     /**
      * c注册服务
@@ -146,6 +150,7 @@ public class AlbumDao {
                 album.setPhotos(photoArrayList);
                 albumArrayList.add(album);
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();

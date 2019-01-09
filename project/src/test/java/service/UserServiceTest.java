@@ -1,9 +1,8 @@
 package service;
 
 import org.junit.Test;
-import po.User;
 
-import static org.junit.Assert.*;
+import po.User;
 
 public class UserServiceTest {
     UserService userService = new UserService();

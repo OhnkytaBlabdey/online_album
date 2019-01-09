@@ -19,9 +19,10 @@
 	<maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+
+
   <dependencies>
-
-
+  
 	<dependency>
 	  <groupId>junit</groupId>
 	  <artifactId>junit</artifactId>
@@ -46,6 +47,21 @@
 
   <build>
 	<finalName>ImageBlog</finalName>
+	<resources>
+		<resource>
+		<directory>src/main/webapp</directory>
+		<includes>
+			<include>*.conf</include>
+		</includes>
+		<filtering>true</filtering>
+		</resource>
+		<resource>
+			<directory>src/main/webapp</directory>
+			<includes>
+				<include>storage/*</include>
+			</includes>
+		</resource>
+	</resources>
 	<pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
 	  <plugins>
 		<plugin>

@@ -11,7 +11,7 @@ import utility.Global;
 
 public final class DBKit {
 	// JDBC
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";  
  
 
     // user and password for database

@@ -3,6 +3,7 @@ package servlets;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -41,19 +42,26 @@ public class FileUploadServlet extends HttpServlet {
 
 	/**
 	 *  user upload file
+	 * @throws IOException 
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException
+			{
 		request.setCharacterEncoding("utf-8");
+		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		try {
+			
 
 		//TODO initialize configuration
-		Global.conf_path=request.getServletContext().getRealPath("/system.conf");
+		Global.conf_path=request.getServletContext().getRealPath("./WEB-INF/classes/system.conf");
+//		Global.conf_path="./system.conf";
 		 
 		// 指定文件上传存储路径
 		 String savePath = null;
 		 savePath=ConfKit.getProperty("imgs");
+		 savePath=getServletContext().getRealPath(savePath);
 		 if(savePath==null) {
 			 doGet(request, response);
 			 return;
@@ -91,8 +99,14 @@ public class FileUploadServlet extends HttpServlet {
 			}
 		}
 
-		PrintWriter out = response.getWriter();
-		out.println("文件上传成功！");
+//		PrintWriter out = response.getWriter();
+		out.println("文件上传结束");
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace(out);
+		} catch (ServletException e) {
+			e.printStackTrace(out);
+		}
 		out.flush();
 		out.close();
 	}
