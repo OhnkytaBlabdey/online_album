@@ -58,7 +58,7 @@
 		<resource>
 			<directory>src/main/webapp</directory>
 			<includes>
-				<include>storage/*</include>
+				<include>/storage/*</include>
 			</includes>
 		</resource>
 	</resources>

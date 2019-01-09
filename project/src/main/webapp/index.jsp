@@ -1,3 +1,6 @@
+<%@ page import="po.Album" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="po.Comment" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -6,9 +9,10 @@
 	<link rel="stylesheet" href="./css/init.css">
 	<link rel="stylesheet" href="./css/Index_css.css">
 </head>
+<!--
 <body>
 	<div id="header" class="clearfix">
-		<a href="${pageContext.request.contextPath}/ImagesServlet?method=findall&location=0" class="index">
+		<a href="${pageContext.request.contextPath}/ImagesServlet?method=findall&pageNumber=0" class="index">
 			<img src="imageSources/blogLogo.jpg" alt="">
 			<span>主站</span>
 		</a>
@@ -32,6 +36,9 @@
 		</c:if>
 
 	</div>
+	<a>
+	
+	</a>
 	<div id="container">
 		<div class="background"></div>
 		<div class="body">
@@ -46,35 +53,38 @@
 					<h2>随便看看</h2>
 				</div>
 				<%--模块--%>
-				<c:set var="location" value="0"/>
-				<c:forEach begin="${location}" end="${location+4}" step="1">
-					<%!
-
+				<%
+					ArrayList<Album> albumArrayList = new ArrayList<>();
+					if(session.getAttribute("albumArrayList") != null) {
+					    albumArrayList = (ArrayList<Album>) session.getAttribute("albumArrayList");
+					}
+				%>
+				<c:forEach var="location" begin="0" end="<%=albumArrayList.size()-1%>" step="1">
+					<%
+						Album album = albumArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location"))));
+						ArrayList<Comment> commentArrayList = album.getComments();
 					%>
 					<div class="content clearfix">
 						<div class="left">
 							<div class="img">
 								<img src="imageSources/after_login.jpg" alt="">
 							</div>
-							<div class="name"><span>李狗蛋</span></div>
+							<div class="name"><span><%=album.getUserName()%></span></div>
 						</div>
 						<div class="right">
 							<div class="img_title">
-								<h3>我是标题</h3>
-								<span class="time">我是时间</span>
+								<h3><%=album.getName()%></h3>
+								<span class="time"><%=album.getUserName()%></span>
 							</div>
 							<div class="img_content clearfix">
 								<div class="img_content_left">
-									<img src="imageSources/after_login.jpg" alt="">
-								</div>
-								<div class="img_content_para">
-									<p>1233211231233654sa65d46a4sd65465465as4d654a6s5d46as5d465a4sd654as6d54a65s4d6a54sd65a4s65d4a6s54d6a5s4d6a54s6d54</p>
+									<img src="${pageContext.request.contextPath}/ImagesServlet?method=findbylocation&location=${location}" alt="">
 								</div>
 							</div>
 							<div class="good_bad">
 								<a href="" class="good">
 									<img src="imageSources/good_pre.png" alt="">
-									<span>我是点赞个数</span>
+									<span>10</span>
 								</a>
 								<a href="" class="you_bad_bad">
 									<img src="imageSources/you_bad_bad_pre.png" alt="">
@@ -84,11 +94,11 @@
 							<div class="comment">
 								<div class="comment_title">
 									<span>评论区</span>
-									<span>(我是个数)</span>
 								</div>
 								<div class="comment_form clearfix">
-									<form action="">
-										<textarea name="input_comment" class="input_comment" cols="90" rows="5" class="line" placeholder="留下你的足迹"></textarea>
+									<%--提交评论--%>
+									<form action="${pageContext.request.contextPath}/comment">
+										<textarea name="input_comment" class="input_comment" cols="90" rows="5" class="line" placeholder="留下你的足迹111"></textarea>
 										<input type="submit" class="line submit" value="评论">
 									</form>
 								</div>
@@ -97,72 +107,32 @@
 										<span>别人在说</span>
 									</div>
 									<%--评论--%>
-									<div class="comment_sel clearfix">
-										<div class="other_pic">
-											<img src="imageSources/log_change.gif" alt="">
-										</div>
-										<div class="other_comment_content">
-											<div class="other_name">李狗蛋</div>
-											<div class="other_time">1937.1.1</div>
-											<div class="other_comment_para">
-												<p>123231123321123321123123312123312123ljalskdjl;ajsd;ljl;kjdlckjl;kasdl;knl;knlaksndlkn</p>
+									<c:forEach var="location_comments" begin="0" end="<%=commentArrayList.size() - 1%>" step="1">
+										<%
+											Comment comment = commentArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location_comments"))));
+										%>
+										<div class="comment_sel clearfix">
+											<div class="other_pic">
+												<img src="imageSources/log_change.gif" alt="">
+											</div>
+											<div class="other_comment_content">
+												<div class="other_name"><%=comment.getUserName()%></div>
+												<div class="other_comment_para">
+													<p><%=comment.getComment()%></p>
+												</div>
+											</div>
+											<div class="good_bad">
+												<a href="" class="good">
+													<img src="imageSources/good_pre.png" alt="">
+													<span>20</span>
+												</a>
+												<a href="" class="you_bad_bad">
+													<img src="imageSources/you_bad_bad_pre.png" alt="">
+													<span>You bad bad</span>
+												</a>
 											</div>
 										</div>
-										<div class="good_bad">
-											<a href="" class="good">
-												<img src="imageSources/good_pre.png" alt="">
-												<span>我是点赞个数</span>
-											</a>
-											<a href="" class="you_bad_bad">
-												<img src="imageSources/you_bad_bad_pre.png" alt="">
-												<span>You bad bad</span>
-											</a>
-										</div>
-									</div>
-									<div class="comment_sel clearfix">
-										<div class="other_pic">
-											<img src="imageSources/log_change.gif" alt="">
-										</div>
-										<div class="other_comment_content">
-											<div class="other_name">李狗蛋</div>
-											<div class="other_time">1937.1.1</div>
-											<div class="other_comment_para">
-												<p>123231123321123321123123312123312123ljalskdjl;ajsd;ljl;kjdlckjl;kasdl;knl;knlaksndlkn</p>
-											</div>
-										</div>
-										<div class="good_bad">
-											<a href="" class="good">
-												<img src="imageSources/good_pre.png" alt="">
-												<span>我是点赞个数</span>
-											</a>
-											<a href="" class="you_bad_bad">
-												<img src="imageSources/you_bad_bad_pre.png" alt="">
-												<span>You bad bad</span>
-											</a>
-										</div>
-									</div>
-									<div class="comment_sel clearfix">
-										<div class="other_pic">
-											<img src="imageSources/log_change.gif" alt="">
-										</div>
-										<div class="other_comment_content">
-											<div class="other_name">李狗蛋</div>
-											<div class="other_time">1937.1.1</div>
-											<div class="other_comment_para">
-												<p>123231123321123321123123312123312123ljalskdjl;ajsd;ljl;kjdlckjl;kasdl;knl;knlaksndlkn</p>
-											</div>
-										</div>
-										<div class="good_bad">
-											<a href="" class="good">
-												<img src="imageSources/good_pre.png" alt="">
-												<span>我是点赞个数</span>
-											</a>
-											<a href="" class="you_bad_bad">
-												<img src="imageSources/you_bad_bad_pre.png" alt="">
-												<span>You bad bad</span>
-											</a>
-										</div>
-									</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -173,6 +143,7 @@
 		</div>
 	</div>
 </body>
+ -->
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/Index_js.js"></script>
 </html>
