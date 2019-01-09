@@ -1,20 +1,20 @@
 package dao;
 
 import db.DBUtil;
+import po.Photo;
 import po.User;
-import java.sql.*;
 
-/**
- *c 处理用户表的查询等操作
- */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class UserDao {
+public class PhotoDao {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    User user = new User();
     String sql = null;
     Connection connection = null;
-    DBUtil dbUtil = new DBUtil();
     /**
      * c  关闭各种资源(使用resultset)
      */
@@ -51,52 +51,28 @@ public class UserDao {
         }
     }
     /**
-     *c 通过用户名查询
-     * */
-    public User findByUserName(String username){
+     * 根据相册id查询图片返回数组
+     */
+    public ArrayList<Photo> findPhtotsByAlbumId(String id){
+        ArrayList<Photo> photoArrayList = new ArrayList<Photo>();
         try {
-            connection = dbUtil.getConnection();
+            connection = DBUtil.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        sql = "select username,psw,nickname from user where username = ?";
+        sql = "select albumid,photopath from photo where albumid = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, username);
+            preparedStatement.setInt(1, Integer.parseInt(id));
             resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                user.setUserName(resultSet.getString(1));
-                user.setPassword(resultSet.getString(2));
-                user.setNickName(resultSet.getString(3));
+            while(resultSet.next()){
+                Photo photo = new Photo(Integer.parseInt(resultSet.getString(1)), resultSet.getString(2));
+                photoArrayList.add(photo);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         closeParaResources();
-        return user;
+        return photoArrayList;
     }
-    /**
-     * c注册服务
-     */
-    public void addUser(User user){
-        try {
-            connection = dbUtil.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        sql = "insert into user (username,psw,nickname) values(?,?,?)";
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, user.getUserName());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getNickName());
-            preparedStatement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        closeResources();
-    }
-    /**
-     *
-     */
 }

@@ -4,8 +4,11 @@ import dao.UserDao;
 import po.User;
 
 public class UserService {
-    UserDao userDao = new UserDao();
+    public static void main(String[] args) {
+		System.out.println(new UserService().findByUserNameService("name4").getNickName());
+	}
 
+    UserDao userDao = new UserDao();
     /**
      * 通过用户名查询
      */
@@ -31,12 +34,7 @@ public class UserService {
     public String registorService(User user){
         User user_temp = findByUserNameService(user.getUserName());
         System.out.println(user_temp);
-//        if((null != user_temp) || (null != user_temp.getUserName())){
-//            return "username_exist";
-//        }else{
-//            userDao.addUser(user);
-//            return "success";
-//        }
+
         return "success";
     }
 }

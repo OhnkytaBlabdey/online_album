@@ -12,5 +12,6 @@
 </head>
 <body>
 
+<img alt="img " src="./image?id=10&format=jpg">
 </body>
 </html>
