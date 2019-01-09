@@ -18,4 +18,8 @@
     <servlet-name>ImageServlet</servlet-name>
     <servlet-class>servlets.ImageServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ImagesServlet</servlet-name>
+    <servlet-class>servlets.ImagesServlet</servlet-class>
+  </servlet>
 </web-app>
