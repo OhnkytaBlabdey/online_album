@@ -9,25 +9,34 @@ public class Album {
 	private int id;
 	private String name;
 	private String userName;
-
+    ArrayList<Comment> comments = new ArrayList<>();
 	ArrayList<Photo> photos = new ArrayList<Photo>();
 
 	public String getUserName() {
 		return userName;
 	}
 
-	@Override
-	public String toString() {
-		return "Album{" +
-				"userid=" + userid +
-				", id=" + id +
-				", name='" + name + '\'' +
-				", photos=" + photos +
-				", userName='" + userName + '\'' +
-				'}';
-	}
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
 
-	public void setUserName(String userName) {
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Album{" +
+                "userid=" + userid +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
+                ", comments=" + comments +
+                ", photos=" + photos +
+                '}';
+    }
+
+    public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
