@@ -34,6 +34,7 @@ public class ImageServlet extends HttpServlet {
 		// 可以从请求字符串中获取要显示的图片名
 		String imgId = (String) request.getParameter("id");
 		String imgFormat=(String)request.getParameter("format");
+		System.out.println(imgFormat + " " + imgId);
 		if(imgFormat==null || imgId==null) {
 			return;
 		}
@@ -41,6 +42,7 @@ public class ImageServlet extends HttpServlet {
 		// 查询数据库获得完整的图片路径（此处临时拼凑一个）
 		String imgPath = ConfKit.getProperty("imgs") + imgId +"."+ imgFormat; 
 		imgPath=getServletContext().getRealPath(imgPath);
+		System.out.println(imgPath);
 		if (null != imgPath && !"".equals(imgPath.trim())) {
 			ImageUtil.showImage(response,out, imgPath, true);
 		}

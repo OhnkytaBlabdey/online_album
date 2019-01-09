@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import db.DBUtil;
 import po.Album;
+import po.Comment;
 import po.Photo;
 
 public class AlbumDao {
@@ -126,7 +127,6 @@ public class AlbumDao {
      */
     public ArrayList<Album> findAllAlbums(int location){
         ArrayList<Album> albumArrayList = new ArrayList<>();
-        ArrayList<Photo> photoArrayList = new ArrayList<>();
         try {
             connection = DBUtil.getConnection();
             sql = "select * from album limit ?,5";
@@ -138,16 +138,46 @@ public class AlbumDao {
                 album.setId(resultSet.getInt(1));
                 album.setUserid(resultSet.getInt(2));
                 album.setName(resultSet.getString(3));
+
+                /**
+                 * 查询图片
+                 */
                 sql = "select albumid,photopath from photo where albumid = ?";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, (album.getId()));
                 resultSet_temp = preparedStatement.executeQuery();
-                photoArrayList.clear();
+                ArrayList<Photo> photoArrayList = new ArrayList<>();
                 while(resultSet_temp.next()){
-                    Photo photo = new Photo(Integer.parseInt(resultSet.getString(1)), resultSet.getString(2));
+                    Photo photo = new Photo(resultSet_temp.getInt(1), resultSet_temp.getString(2));
                     photoArrayList.add(photo);
                 }
                 album.setPhotos(photoArrayList);
+
+                /**
+                 * 查询用户ID
+                 */
+                sql = "select username from user where id = ?";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, album.getUserid());
+                ResultSet resultSet_temp = preparedStatement.executeQuery();
+                if(resultSet_temp.next()){
+                    album.setUserName(resultSet_temp.getString(1));
+                }
+
+                /**
+                 * 查询相关评论
+                 */
+                sql = "select username,comment from comment where albumid = ?";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, album.getId());
+                ResultSet resultSet_comment = preparedStatement.executeQuery();
+                ArrayList<Comment> commentArrayList = new ArrayList<>();
+                while(resultSet_comment.next()){
+                    Comment comment = new Comment(album.getId(),resultSet_comment.getString(2),resultSet_comment.getString(1));
+                    commentArrayList.add(comment);
+                }
+                album.setComments(commentArrayList);
+
                 albumArrayList.add(album);
             }
 
