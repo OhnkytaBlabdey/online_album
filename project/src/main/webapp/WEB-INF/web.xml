@@ -26,4 +26,9 @@
     <servlet-name>CommentServlet</servlet-name>
     <servlet-class>servlets.CommentServlet</servlet-class>
   </servlet>
+  <filter>
+    <filter-name>CommentFilter</filter-name>
+    <filter-class>filters.CommentFilter</filter-class>
+  </filter>
+
 </web-app>
