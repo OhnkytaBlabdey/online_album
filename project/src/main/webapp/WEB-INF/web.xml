@@ -22,4 +22,8 @@
     <servlet-name>ImagesServlet</servlet-name>
     <servlet-class>servlets.ImagesServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CommentServlet</servlet-name>
+    <servlet-class>servlets.CommentServlet</servlet-class>
+  </servlet>
 </web-app>
