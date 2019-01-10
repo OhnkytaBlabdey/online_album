@@ -43,6 +43,7 @@ public class ImagesServlet extends HttpServlet {
         if(method.equals("findall")){
             int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
             albumArrayList = albumService.findAllAlbums(pageNumber);
+            out.println(pageNumber+albumArrayList.toString());
             session.setAttribute("albumArrayList", albumArrayList);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
 

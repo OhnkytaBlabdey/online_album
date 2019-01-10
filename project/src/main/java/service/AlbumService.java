@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.AlbumDao;
@@ -13,7 +14,7 @@ public class AlbumService {
     public Album[] findTenAlbum(){
         return null;
     }
-    public ArrayList<Album> findAllAlbums(int location){
+    public ArrayList<Album> findAllAlbums(int location) throws SQLException{
         return albumDao.findAllAlbums(location);
     }
     public ArrayList<Album> findAllAlbumsByUserName(String userName){
