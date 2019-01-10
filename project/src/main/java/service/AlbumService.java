@@ -22,4 +22,7 @@ public class AlbumService {
     public void deleteAlbumByAlbumId(int id){
         albumDao.deleteAlbumsByAlbumId(id);
     }
+    public void addAlbumService(String userName, Album album){
+        albumDao.addAlbum(userName, album);
+    }
 }

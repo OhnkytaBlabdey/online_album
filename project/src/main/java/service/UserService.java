@@ -42,7 +42,7 @@ public class UserService {
         }
     	else if(user.isNotValid()) {
     		System.err.println("[UserService]:\tuser info invalid");
-    		return "falied";
+    		return "wrong_info";
     	}
         System.out.println(user);
         userDao.addUser(user);

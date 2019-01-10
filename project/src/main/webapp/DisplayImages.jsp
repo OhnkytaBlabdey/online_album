@@ -29,6 +29,9 @@
         <a href="${pageContext.request.contextPath}/UserServlet?method=logout" class="logout after_login">
             <span>注销</span>
         </a>
+        <a href="${pageContext.request.contextPath}/ImagesServlet?method=findallbyusername&username=<%=((User)(session.getAttribute("userInfo"))).getUserName()%>" class="login">
+            <span>个人主页</span>
+        </a>
         <a href="${pageContext.request.contextPath}/PersonalIndex.jsp" class="info after_login">
             <img src="imageSources/after_login.jpg" alt="">
             <span>新建相册</span>
@@ -77,7 +80,7 @@
                                         <%--删除--%>
                                         <%--添加--%>
                                         <div id="add">
-                                            <a href="${pageContext.request.contextPath}/ImagesServlet?method=addImages">
+                                            <a href="${pageContext.request.contextPath}/upload.jsp">
                                                 <img src="imageSources/add.png" alt="">
                                             </a>
                                         </div>

@@ -89,9 +89,16 @@ public class UserServlet extends HttpServlet {
                     + request.getContextPath()
                     + "/LogIn.jsp';"
                     + "</script>");
-        }else{
+        }else if(result.equals("failed")){
             out.print("<script>"
                     + "alert('用户名已存在!');"
+                    + "window.location.href='"
+                    + request.getContextPath()
+                    + "/Registor.jsp';"
+                    + "</script>");
+        }else if(request.equals("wrong_info")){
+            out.print("<script>"
+                    + "alert('注册信息错误!');"
                     + "window.location.href='"
                     + request.getContextPath()
                     + "/Registor.jsp';"

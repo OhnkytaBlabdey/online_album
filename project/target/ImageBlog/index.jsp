@@ -60,6 +60,7 @@
 					    albumArrayList = (ArrayList<Album>) session.getAttribute("albumArrayList");
 					}
 				%>
+
 				<c:forEach var="location" begin="0" end="<%=albumArrayList.size()-1%>" step="1">
 					<%
 						Album album = albumArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location"))));
@@ -77,11 +78,13 @@
 								<h3><a href="${pageContext.request.contextPath}/ImagesServlet?method=setAlbumFromIndex&location=${location}"><%=album.getName()%></a></h3>
 								<span class="time"><%=album.getUserName()%></span>
 							</div>
-							<div class="img_content clearfix">
-								<div class="img_content_left">
-									<img src="${pageContext.request.contextPath}/ImagesServlet?method=findbylocation&location=${location}" alt="">
+							<c:if test="<%=!album.getPhotos().isEmpty()%>">
+								<div class="img_content clearfix">
+									<div class="img_content_left">
+										<img src="${pageContext.request.contextPath}/ImagesServlet?method=findbylocation&location=${location}" alt="">
+									</div>
 								</div>
-							</div>
+							</c:if>
 							<div class="good_bad">
 								<a href="" class="good">
 									<img src="imageSources/good_pre.png" alt="">
@@ -108,32 +111,34 @@
 										<span>别人在说</span>
 									</div>
 									<%--评论--%>
-									<c:forEach var="location_comments" begin="0" end="<%=commentArrayList.size() - 1%>" step="1">
-										<%
-											Comment comment = commentArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location_comments"))));
-										%>
-										<div class="comment_sel clearfix">
-											<div class="other_pic">
-												<img src="imageSources/log_change.gif" alt="">
-											</div>
-											<div class="other_comment_content">
-												<div class="other_name"><%=comment.getUserName()%></div>
-												<div class="other_comment_para">
-													<p><%=comment.getComment()%></p>
+									<c:if test="<%=!commentArrayList.isEmpty()%>">
+										<c:forEach var="location_comments" begin="0" end="<%=commentArrayList.size() - 1%>" step="1">
+											<%
+												Comment comment = commentArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location_comments"))));
+											%>
+											<div class="comment_sel clearfix">
+												<div class="other_pic">
+													<img src="imageSources/log_change.gif" alt="">
+												</div>
+												<div class="other_comment_content">
+													<div class="other_name"><%=comment.getUserName()%></div>
+													<div class="other_comment_para">
+														<p><%=comment.getComment()%></p>
+													</div>
+												</div>
+												<div class="good_bad">
+													<a href="" class="good">
+														<img src="imageSources/good_pre.png" alt="">
+														<span>20</span>
+													</a>
+													<a href="" class="you_bad_bad">
+														<img src="imageSources/you_bad_bad_pre.png" alt="">
+														<span>You bad bad</span>
+													</a>
 												</div>
 											</div>
-											<div class="good_bad">
-												<a href="" class="good">
-													<img src="imageSources/good_pre.png" alt="">
-													<span>20</span>
-												</a>
-												<a href="" class="you_bad_bad">
-													<img src="imageSources/you_bad_bad_pre.png" alt="">
-													<span>You bad bad</span>
-												</a>
-											</div>
-										</div>
-									</c:forEach>
+										</c:forEach>
+									</c:if>
 								</div>
 							</div>
 						</div>
