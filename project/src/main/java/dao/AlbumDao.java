@@ -83,12 +83,24 @@ public class AlbumDao {
     /**
      * 
      */
-    public void addAlbum(Album album_t) {
+    public void addAlbum(String userName, Album album_t) {
         try {
             connection = DBUtil.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        sql = "select id from user where name = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, userName);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                album_t.setUserid(resultSet.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         sql = "insert into album (name,userid) values(?,?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -146,9 +158,9 @@ public class AlbumDao {
         ArrayList<Album> albumArrayList = new ArrayList<>();
         try {
             connection = DBUtil.getConnection();
-            sql = "select * from album limit ?,5";
+            sql = "select * from album";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, location);
+//            preparedStatement.setInt(1, location);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 Album album = new Album();

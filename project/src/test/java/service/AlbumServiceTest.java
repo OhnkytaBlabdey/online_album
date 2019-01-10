@@ -1,6 +1,7 @@
 package service;
 
 import org.junit.Test;
+import po.Album;
 
 import java.sql.SQLException;
 
@@ -10,6 +11,8 @@ public class AlbumServiceTest {
     AlbumService albumService = new AlbumService();
     @Test
     public void findByAlbumIdService() {
-        System.out.println(albumService.findAllAlbumsByUserName("root"));
+        Album album = new Album();
+        album.setName("new");
+        albumService.addAlbumService("root", album);
     }
 }
