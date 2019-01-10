@@ -59,7 +59,7 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        sql = "select username,psw,nickname from user where username = ?";
+        sql = "select name,psw,nickname from user where name = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);

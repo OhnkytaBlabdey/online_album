@@ -173,7 +173,7 @@ public class AlbumDao {
                 /**
                  * 查询用户ID
                  */
-                sql = "select username from user where id = ?";
+                sql = "select name from user where id = ?";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, album.getUserid());
                 ResultSet resultSet_temp = preparedStatement.executeQuery();
@@ -221,7 +221,7 @@ public class AlbumDao {
             /**
              * 查询用户id
              */
-            sql = "select id from user where username = ?";
+            sql = "select id from user where name = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, userName);
             resultSet = preparedStatement.executeQuery();
