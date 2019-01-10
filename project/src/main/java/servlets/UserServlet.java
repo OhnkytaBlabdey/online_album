@@ -2,6 +2,7 @@ package servlets;
 
 import po.User;
 import service.UserService;
+import utility.Global;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +26,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Global.conf_path=request.getServletContext().getRealPath(Global.conf);
         String method = request.getParameter("method");
         System.out.println(method);
         response.setCharacterEncoding("utf-8");

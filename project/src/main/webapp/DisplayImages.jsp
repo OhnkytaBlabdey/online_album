@@ -46,22 +46,12 @@
             <div class="right_arrow" id="right_arrow"></div>
         </div>
         <div class="recent_display">
-            <div class="title">
-                <h2><%=((User)(session.getAttribute("userInfo"))).getUserName()%>的个人主页</h2>
-            </div>
-            <%--模块--%>
             <%
-                ArrayList<Album> albumArrayListByUserName = new ArrayList<>();
-                albumArrayListByUserName = (ArrayList<Album>) session.getAttribute("albumArrayListByUserName");
+                Album album = (Album) session.getAttribute("album");
             %>
-            <c:if test="<%=!albumArrayListByUserName.isEmpty()%>">
-                <%
-                %>
-                <c:forEach var="location" begin="0" end="<%=albumArrayListByUserName.size()-1%>" step="1">
-                    <%
-                        Album album = albumArrayListByUserName.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location"))));
-                        ArrayList<Comment> commentArrayList = album.getComments();
-                    %>
+            <div class="title">
+                <h2>相册：<%=album.getName()%></h2>
+            </div>
                     <div class="content clearfix">
                         <div class="left">
                             <div class="img">
@@ -73,20 +63,36 @@
                             <div class="img_title">
                                 <h3><%=album.getName()%></h3>
                                 <span class="time"><%=album.getUserName()%></span>
-                                    <%--删除--%>
-                                <div id="delete">
-                                    <a href="${pageContext.request.contextPath}/ImagesServlet?method=deleteAlbumById&albumId=<%=album.getId()%>">
-                                        <img src="imageSources/delete.png" alt="">
-                                    </a>
-                                </div>
-                                    <%--删除--%>
+                                <c:if test="${sessionScope.userInfo != null}">
+                                    <%
+                                        User user = (User) session.getAttribute("userInfo");
+                                    %>
+                                    <c:if test="<%=user.getUserName().equals(album.getUserName())%>">
+                                        <%--删除--%>
+                                        <div id="delete">
+                                            <a href="${pageContext.request.contextPath}/ImagesServlet?method=deleteAlbumById&albumId=<%=album.getId()%>">
+                                                <img src="imageSources/delete.png" alt="">
+                                            </a>
+                                        </div>
+                                        <%--删除--%>
+                                        <%--添加--%>
+                                        <div id="add">
+                                            <a href="${pageContext.request.contextPath}/ImagesServlet?method=addImages">
+                                                <img src="imageSources/add.png" alt="">
+                                            </a>
+                                        </div>
+                                        <%--添加--%>
+                                    </c:if>
+                                </c:if>
                             </div>
                             <c:if test="<%=!album.getPhotos().isEmpty()%>">
-                                <div class="img_content clearfix">
-                                    <div class="img_content_left">
-                                        <img src="${pageContext.request.contextPath}/ImagesServlet?method=findSingleAlbumbylocation&location=${location}" alt="">
+                                <c:forEach var="location" begin="0" end="<%=album.getPhotos().size() - 1%>" step="1">
+                                    <div class="img_content clearfix">
+                                        <div class="img_content_left">
+                                            <img src="${pageContext.request.contextPath}/ImagesServlet?method=showImageByLocation&location=${location}" alt="">
+                                        </div>
                                     </div>
-                                </div>
+                                </c:forEach>
                                 <div class="good_bad">
                                     <a href="" class="good">
                                         <img src="imageSources/good_pre.png" alt="">
@@ -97,56 +103,9 @@
                                         <span>You bad bad</span>
                                     </a>
                                 </div>
-                                <div class="comment">
-                                    <div class="comment_title">
-                                        <span>评论区</span>
-                                    </div>
-                                    <div class="comment_form clearfix">
-                                        <form action="">
-                                            <textarea name="input_comment" class="input_comment" cols="90" rows="5" class="line" placeholder="留下你的足迹"></textarea>
-                                            <input type="submit" class="line submit" value="评论">
-                                        </form>
-                                    </div>
-                                    <div class="other_comment">
-                                        <div class="comment_title">
-                                            <span>别人在说</span>
-                                        </div>
-                                            <%--评论--%>
-                                        <c:if test="<%=!commentArrayList.isEmpty()%>">
-                                            <c:forEach var="location_comments" begin="0" end="<%=commentArrayList.size() - 1%>" step="1">
-                                                <%
-                                                    Comment comment = commentArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location_comments"))));
-                                                %>
-                                                <div class="comment_sel clearfix">
-                                                    <div class="other_pic">
-                                                        <img src="imageSources/log_change.gif" alt="">
-                                                    </div>
-                                                    <div class="other_comment_content">
-                                                        <div class="other_name"><%=comment.getUserName()%></div>
-                                                        <div class="other_comment_para">
-                                                            <p><%=comment.getComment()%></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="good_bad">
-                                                        <a href="" class="good">
-                                                            <img src="imageSources/good_pre.png" alt="">
-                                                            <span>20</span>
-                                                        </a>
-                                                        <a href="" class="you_bad_bad">
-                                                            <img src="imageSources/you_bad_bad_pre.png" alt="">
-                                                            <span>You bad bad</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </c:forEach>
-                                        </c:if>
-                                    </div>
-                                </div>
                             </c:if>
                         </div>
                     </div>
-                </c:forEach>
-            </c:if>
             <%--单个模块截至--%>
         </div>
     </div>

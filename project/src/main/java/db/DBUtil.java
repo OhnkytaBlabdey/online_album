@@ -16,9 +16,12 @@ public class DBUtil {
 
     public static Connection getConnection() throws SQLException {
         try {
-        	username=ConfKit.getProperty("db_user");
-        	password=ConfKit.getProperty("db_pw");
-        	url=ConfKit.getProperty("db_url");
+//        	username=ConfKit.getProperty("db_user");
+//        	password=ConfKit.getProperty("db_pw");
+//        	url=ConfKit.getProperty("db_url");
+            username = "root";
+            password = "root";
+            url = "jdbc:mysql://localhost:3306/online_album?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
             Class.forName(drivername);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

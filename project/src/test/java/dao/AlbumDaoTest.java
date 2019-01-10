@@ -18,7 +18,7 @@ public class AlbumDaoTest {
     }
     @Test
     public void findByUserId(){
-        System.out.println(albumDao.findAllAlbumsByUserName("root"));
+        System.out.println(albumDao.findAllAlbumsByUserName("didi"));
     }
     @Test
     public void delete(){
