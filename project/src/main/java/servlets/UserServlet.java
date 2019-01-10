@@ -44,11 +44,14 @@ public class UserServlet extends HttpServlet {
     	request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        try {
     	User user = new User();
         user.setUserInfo(request.getParameter("username"), request.getParameter("password"));
         String result = userService.logInService(user);
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
+        
+        
         if (result.equals("no_account")) {
         	System.err.println(result);
             out.print("<script>"
@@ -72,17 +75,22 @@ public class UserServlet extends HttpServlet {
                     + "/ImagesServlet?method=findall&pageNumber=0';"
                     + "</script>");
         }
+        }catch (Exception e) {
+			e.printStackTrace(out);
+		}
     }
 
     protected void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-    	User user = new User();
+    	
+        PrintWriter out = response.getWriter();
+        try {
+        	User user = new User();
         user.setUserInfo(request.getParameter("username"), request.getParameter("password"), request.getParameter("nickname"));
         String result = userService.registorService(user);
-        PrintWriter out = response.getWriter();
-        System.out.println(result);
+         System.out.println(result);
         if (result.equals("success")) {
             out.print("<script>"
                     + "window.location.href='"
@@ -104,6 +112,9 @@ public class UserServlet extends HttpServlet {
                     + "/Registor.jsp';"
                     + "</script>");
         }
+    }catch (Exception e) {
+		e.printStackTrace(out);
+	}
 
     }
 

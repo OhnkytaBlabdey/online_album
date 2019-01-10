@@ -60,7 +60,7 @@
 					    albumArrayList = (ArrayList<Album>) session.getAttribute("albumArrayList");
 					}
 				%>
-
+				<c:if test="${sessionScope.albumArrayList !=null}">
 				<c:forEach var="location" begin="0" end="<%=albumArrayList.size()-1%>" step="1">
 					<%
 						Album album = albumArrayList.get(Integer.parseInt(String.valueOf(pageContext.getAttribute("location"))));
@@ -144,6 +144,7 @@
 						</div>
 					</div>
 				</c:forEach>
+				</c:if>
 				<%--单个模块截至--%>
 			</div>
 		</div>
