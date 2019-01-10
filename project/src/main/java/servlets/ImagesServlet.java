@@ -50,7 +50,8 @@ public class ImagesServlet extends HttpServlet {
 
             String imgPath = photo.getPhotoPath();
 
-            imgPath = getServletContext().getRealPath(imgPath);
+//            imgPath = getServletContext().getRealPath(imgPath);
+
             OutputStream outImg=response.getOutputStream();
             if (null != imgPath && !"".equals(imgPath.trim())) {
                 ImageUtil.showImage(response,outImg, imgPath, true);
@@ -75,7 +76,7 @@ public class ImagesServlet extends HttpServlet {
 
             String imgPath = photo.getPhotoPath();
 
-            imgPath = getServletContext().getRealPath(imgPath);
+//            imgPath = getServletContext().getRealPath(imgPath);
             OutputStream outImg=response.getOutputStream();
             if (null != imgPath && !"".equals(imgPath.trim())) {
                 ImageUtil.showImage(response,outImg, imgPath, true);
@@ -97,7 +98,7 @@ public class ImagesServlet extends HttpServlet {
 
             String imgPath = photo.getPhotoPath();
 
-            imgPath = getServletContext().getRealPath(imgPath);
+//            imgPath = getServletContext().getRealPath(imgPath);
             OutputStream outImg=response.getOutputStream();
             if (null != imgPath && !"".equals(imgPath.trim())) {
                 ImageUtil.showImage(response,outImg, imgPath, true);
