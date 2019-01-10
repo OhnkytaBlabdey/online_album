@@ -376,12 +376,9 @@
 	        			</div>
 						</fieldset>
 						</form>
-          -->
+         
 				<!-- contact form ends -->		
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <!-- /Contact -->
     <!-- Footer -->
     <footer>
