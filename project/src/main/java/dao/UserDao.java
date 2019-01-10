@@ -50,6 +50,28 @@ public class UserDao {
             e.printStackTrace();
         }
     }
+    
+    public boolean userNameTaken(String name) {
+    	 try {
+             connection = DBUtil.getConnection();
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         sql = "select name from user where name = ?";
+         try {
+             preparedStatement = connection.prepareStatement(sql);
+             preparedStatement.setString(1,name);
+             resultSet = preparedStatement.executeQuery();
+             if(resultSet.next()){
+            	 closeParaResources();
+                 return true;
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         closeParaResources();
+         return false;
+	}
     /**
      *c 通过用户名查询
      * */

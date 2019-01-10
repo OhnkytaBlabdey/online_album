@@ -21,6 +21,10 @@ public class User {
     public String getUserName() {
         return userName;
     }
+    
+    public boolean isEmpty() {
+		return userName==null && password == null && nickName == null;
+	}
 
     public void setUserName(String userName) {
         this.userName = userName;
