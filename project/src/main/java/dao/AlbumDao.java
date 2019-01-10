@@ -58,7 +58,7 @@ public class AlbumDao {
     }
 
     /**
-     * c 通过用户名查询
+     * 
      */
     public Album findByAlbumName(String album_name) {
 
@@ -81,7 +81,7 @@ public class AlbumDao {
 
 
     /**
-     * c注册服务
+     * 
      */
     public void addAlbum(Album album_t) {
         try {
@@ -102,7 +102,20 @@ public class AlbumDao {
     }
     
     public void deleteAlbum(int albumid) {
-    	
+    	try {
+            connection = DBUtil.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        sql = "delete from album where id = ?";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, albumid);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeResources();
     }
 
     /**
