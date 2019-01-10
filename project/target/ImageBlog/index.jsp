@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="./css/init.css">
 	<link rel="stylesheet" href="./css/Index_css.css">
 </head>
+
 <body>
 	<div id="header" class="clearfix">
 		<a href="${pageContext.request.contextPath}/ImagesServlet?method=findall&pageNumber=0" class="index">
@@ -36,6 +37,9 @@
 		</c:if>
 
 	</div>
+	<a>
+
+	</a>
 	<div id="container">
 		<div class="background"></div>
 		<div class="body">
@@ -70,7 +74,7 @@
 						</div>
 						<div class="right">
 							<div class="img_title">
-								<h3><%=album.getName()%></h3>
+								<h3><a href="${pageContext.request.contextPath}/ImagesServlet?method=setAlbumFromIndex&location=${location}"><%=album.getName()%></a></h3>
 								<span class="time"><%=album.getUserName()%></span>
 							</div>
 							<div class="img_content clearfix">
@@ -93,8 +97,9 @@
 									<span>评论区</span>
 								</div>
 								<div class="comment_form clearfix">
-									<form action="">
-										<textarea name="input_comment" class="input_comment" cols="90" rows="5" class="line" placeholder="留下你的足迹"></textarea>
+									<%--提交评论--%>
+									<form action="${pageContext.request.contextPath}/comment">
+										<textarea name="input_comment" class="input_comment" cols="90" rows="5" class="line" placeholder="留下你的足迹111"></textarea>
 										<input type="submit" class="line submit" value="评论">
 									</form>
 								</div>

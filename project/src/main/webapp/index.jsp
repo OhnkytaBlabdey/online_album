@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="./css/init.css">
 	<link rel="stylesheet" href="./css/Index_css.css">
 </head>
-<!--
+
 <body>
 	<div id="header" class="clearfix">
 		<a href="${pageContext.request.contextPath}/ImagesServlet?method=findall&pageNumber=0" class="index">
@@ -38,7 +38,7 @@
 
 	</div>
 	<a>
-	
+
 	</a>
 	<div id="container">
 		<div class="background"></div>
@@ -74,7 +74,7 @@
 						</div>
 						<div class="right">
 							<div class="img_title">
-								<h3><%=album.getName()%></h3>
+								<h3><a href="${pageContext.request.contextPath}/ImagesServlet?method=setAlbumFromIndex&location=${location}"><%=album.getName()%></a></h3>
 								<span class="time"><%=album.getUserName()%></span>
 							</div>
 							<div class="img_content clearfix">
@@ -144,7 +144,6 @@
 		</div>
 	</div>
 </body>
- -->
 <script src="./js/jquery-3.3.1.min.js"></script>
 <script src="./js/Index_js.js"></script>
 </html>

@@ -214,6 +214,7 @@ public class AlbumDao {
             resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 userId = resultSet.getInt(1);
+                System.out.println(userId);
             }else {
                 userId = 0;
             }
@@ -227,6 +228,7 @@ public class AlbumDao {
                     album.setUserid(resultSet_temp.getInt(2));
                     album.setName(resultSet_temp.getString(3));
                     album.setUserName(userName);
+                    System.out.println(album);
 
                     /**
                      * 查询图片

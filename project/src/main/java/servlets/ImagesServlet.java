@@ -4,6 +4,7 @@ import po.Album;
 import po.Photo;
 import po.User;
 import service.AlbumService;
+import utility.Global;
 import utility.ImageUtil;
 
 import javax.servlet.ServletException;
@@ -22,9 +23,11 @@ import java.util.Hashtable;
 
 @WebServlet("/ImagesServlet")
 public class ImagesServlet extends HttpServlet {
+
     public AlbumService albumService = new AlbumService();
     ArrayList<Album> albumArrayList = new ArrayList<>();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Global.conf_path=request.getServletContext().getRealPath(Global.conf);
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");
         String method = request.getParameter("method");
@@ -51,6 +54,7 @@ public class ImagesServlet extends HttpServlet {
             }
         }else if(method.equals("findallbyusername")){
             String userName = ((User)(session.getAttribute("userInfo"))).getUserName();
+            System.out.println(userName);
             ArrayList<Album> albumArrayListByUserName = albumService.findAllAlbumsByUserName(userName);
             System.out.println(albumArrayListByUserName);
             session.setAttribute("albumArrayListByUserName", albumArrayListByUserName);
@@ -74,6 +78,28 @@ public class ImagesServlet extends HttpServlet {
                 ImageUtil.showImage(response,outImg, imgPath, true);
             }
         }else if(method.equals("setAlbum")){
+            int location = Integer.parseInt(request.getParameter("location"));
+            ArrayList<Album> albumArrayList_temp = (ArrayList<Album>) session.getAttribute("albumArrayListByUserName");
+
+
+            Album album = albumArrayList_temp.get(location);
+            session.removeAttribute("album");
+            session.setAttribute("album", album);
+            response.sendRedirect(request.getContextPath() + "/DisplayImages.jsp");
+        }else if(method.equals("showImageByLocation")){
+            int location = Integer.parseInt(request.getParameter("location"));
+            Album album = (Album) session.getAttribute("album");
+
+            Photo photo = album.getPhotos().get(location);
+
+            String imgPath = photo.getPhotoPath();
+
+            imgPath = getServletContext().getRealPath(imgPath);
+            OutputStream outImg=response.getOutputStream();
+            if (null != imgPath && !"".equals(imgPath.trim())) {
+                ImageUtil.showImage(response,outImg, imgPath, true);
+            }
+        }else if(method.equals("setAlbumFromIndex")) {
             int location = Integer.parseInt(request.getParameter("location"));
             ArrayList<Album> albumArrayList_temp = (ArrayList<Album>) session.getAttribute("albumArrayList");
 
