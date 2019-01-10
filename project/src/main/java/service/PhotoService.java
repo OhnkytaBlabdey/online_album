@@ -14,8 +14,8 @@ public class PhotoService {
 	public void deleteAllPhotosInAlbum(int album_id) {
 		photoDao.deleteAllPhotosInAlbum(album_id);
 	}
-	 public ArrayList<Photo> findPhtotsByAlbumId(int album_id){
-		return photoDao.findPhtotsByAlbumId(album_id);
-	}
+//	 public ArrayList<Photo> findPhtotsByAlbumId(int album_id){
+//		return photoDao.findPhtotsByAlbumId(album_id);
+//	}
 
 }
