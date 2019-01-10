@@ -29,7 +29,7 @@
         <a href="${pageContext.request.contextPath}/UserServlet?method=logout" class="logout after_login">
             <span>注销</span>
         </a>
-        <a href="${pageContext.request.contextPath}/PersonalIndex.jsp" class="info after_login">
+        <a href="${pageContext.request.contextPath}/CreateAlbum.jsp" class="info after_login">
             <img src="imageSources/after_login.jpg" alt="">
             <span>新建相册</span>
         </a>

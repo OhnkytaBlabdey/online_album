@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +40,7 @@ public class ImagesServlet extends HttpServlet {
             int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
             albumArrayList = albumService.findAllAlbums(pageNumber);
             session.setAttribute("albumArrayList", albumArrayList);
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
 
         }else if (method.equals("findbylocation")){
             int location = Integer.parseInt(request.getParameter("location"));
@@ -50,7 +51,8 @@ public class ImagesServlet extends HttpServlet {
 
             String imgPath = photo.getPhotoPath();
 
-            imgPath = getServletContext().getRealPath(imgPath);
+//            imgPath = getServletContext().getRealPath(imgPath);
+
             OutputStream outImg=response.getOutputStream();
             if (null != imgPath && !"".equals(imgPath.trim())) {
                 ImageUtil.showImage(response,outImg, imgPath, true);
@@ -61,11 +63,11 @@ public class ImagesServlet extends HttpServlet {
             ArrayList<Album> albumArrayListByUserName = albumService.findAllAlbumsByUserName(userName);
             System.out.println(albumArrayListByUserName);
             session.setAttribute("albumArrayListByUserName", albumArrayListByUserName);
-            response.sendRedirect(request.getContextPath() + "/PersonalIndex.jsp");
+            request.getRequestDispatcher("/PersonalIndex.jsp").forward(request, response);
         }else if(method.equals("deleteAlbumById")){
             int albumId = Integer.parseInt(request.getParameter("albumId"));
             albumService.deleteAlbumByAlbumId(albumId);
-            response.sendRedirect(request.getContextPath() + "/ImagesServlet?method=findallbyusername");
+            request.getRequestDispatcher("/ImagesServlet?method=findallbyusername").forward(request, response);
         }else if(method.equals("findSingleAlbumbylocation")){
             int location = Integer.parseInt(request.getParameter("location"));
             ArrayList<Album> albumArrayList_temp = (ArrayList<Album>) session.getAttribute("albumArrayListByUserName");
@@ -75,7 +77,7 @@ public class ImagesServlet extends HttpServlet {
 
             String imgPath = photo.getPhotoPath();
 
-            imgPath = getServletContext().getRealPath(imgPath);
+//            imgPath = getServletContext().getRealPath(imgPath);
             OutputStream outImg=response.getOutputStream();
             if (null != imgPath && !"".equals(imgPath.trim())) {
                 ImageUtil.showImage(response,outImg, imgPath, true);
@@ -88,7 +90,7 @@ public class ImagesServlet extends HttpServlet {
             Album album = albumArrayList_temp.get(location);
             session.removeAttribute("album");
             session.setAttribute("album", album);
-            response.sendRedirect(request.getContextPath() + "/DisplayImages.jsp");
+            request.getRequestDispatcher("/DisplayImages.jsp").forward(request, response);
         }else if(method.equals("showImageByLocation")){
             int location = Integer.parseInt(request.getParameter("location"));
             Album album = (Album) session.getAttribute("album");
@@ -97,7 +99,7 @@ public class ImagesServlet extends HttpServlet {
 
             String imgPath = photo.getPhotoPath();
 
-            imgPath = getServletContext().getRealPath(imgPath);
+//            imgPath = getServletContext().getRealPath(imgPath);
             OutputStream outImg=response.getOutputStream();
             if (null != imgPath && !"".equals(imgPath.trim())) {
                 ImageUtil.showImage(response,outImg, imgPath, true);
@@ -110,7 +112,7 @@ public class ImagesServlet extends HttpServlet {
             Album album = albumArrayList_temp.get(location);
             session.removeAttribute("album");
             session.setAttribute("album", album);
-            response.sendRedirect(request.getContextPath() + "/DisplayImages.jsp");
+            request.getRequestDispatcher("/DisplayImages.jsp").forward(request, response);
         }
     }
 

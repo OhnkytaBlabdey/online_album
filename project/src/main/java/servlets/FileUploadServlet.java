@@ -9,11 +9,11 @@ import java.util.Collection;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 
+import po.Album;
+import po.Photo;
+import service.PhotoService;
 import utility.ConfKit;
 import utility.Global;
 
@@ -29,6 +29,7 @@ import utility.Global;
 @MultipartConfig // 该注解标识此Servlet支持文件上传
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	PhotoService photoService = new PhotoService();
 
 	public FileUploadServlet() {
 		super();
@@ -86,11 +87,16 @@ public class FileUploadServlet extends HttpServlet {
 			String header = part.getHeader("content-disposition");
 			// 获取文件名
 			String fileName = getFileName(header);
-			String absolutePath = savePath + File.separator + fileName;
-
+			String absolutePath = savePath + fileName;
 			// 把文件写到指定路径
 			part.write(absolutePath);
-			
+			Photo photo = new Photo();
+			photo.setPhotoPath(absolutePath);
+			HttpSession session = request.getSession();
+			int albumId = ((Album)session.getAttribute("album")).getId();
+			photo.setAlbumId(albumId);
+			photoService.addPhoto(photo);
+            request.getRequestDispatcher("/ImagesServlet?method=findall&pageNumber=0").forward(request, response);
 		} else { // 一次性上传多个文件
 			for (Part part : parts) { // 循环处理上传的文件
 				// 获取请求头，请求头的格式：form-data; name="file"; filename="abc.jpg"
@@ -99,6 +105,7 @@ public class FileUploadServlet extends HttpServlet {
 				String fileName = getFileName(header);
 				// 把文件写到指定路径
 				part.write(savePath + File.separator + fileName);
+
 			}
 		}
 
