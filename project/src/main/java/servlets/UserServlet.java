@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "user")
+@WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
     /**
 	 * 
@@ -62,7 +62,7 @@ public class UserServlet extends HttpServlet {
             out.print("<script>"
                     + "window.location.href='"
                     + request.getContextPath()
-                    + "/index.jsp';"
+                    + "/ImagesServlet?method=findall&pageNumber=0';"
                     + "</script>");
         }
     }
@@ -97,7 +97,7 @@ public class UserServlet extends HttpServlet {
         out.print("<script>"
                 + "window.location.href='"
                 + request.getContextPath()
-                + "/index.jsp';"
+                + "/ImagesServlet?method=findall&pageNumber=0';"
                 + "</script>");
     }
 

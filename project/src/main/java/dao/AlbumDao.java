@@ -193,4 +193,97 @@ public class AlbumDao {
         }
         return albumArrayList;
     }
+    /**
+     * 通过用户名查询相册
+     */
+    public ArrayList<Album> findAllAlbumsByUserName(String userName){
+        ArrayList<Album> albumArrayList = new ArrayList<>();
+        int userId;
+        try {
+            connection = DBUtil.getConnection();
+            /**
+             * 查询用户id
+             */
+            sql = "select id from user where username = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, userName);
+            resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                userId = resultSet.getInt(1);
+            }else {
+                userId = 0;
+            }
+                sql = "select * from album where userid = ?";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setInt(1, userId);
+                resultSet_temp = preparedStatement.executeQuery();
+                while (resultSet_temp.next()) {
+                    Album album = new Album();
+                    album.setId(resultSet_temp.getInt(1));
+                    album.setUserid(resultSet_temp.getInt(2));
+                    album.setName(resultSet_temp.getString(3));
+                    album.setUserName(userName);
+
+                    /**
+                     * 查询图片
+                     */
+                    sql = "select albumid,photopath from photo where albumid = ?";
+                    preparedStatement = connection.prepareStatement(sql);
+                    preparedStatement.setInt(1, (album.getId()));
+                    ResultSet resultSet_temp_temp = preparedStatement.executeQuery();
+                    ArrayList<Photo> photoArrayList = new ArrayList<>();
+                    while (resultSet_temp_temp.next()) {
+                        Photo photo = new Photo(resultSet_temp_temp.getInt(1), resultSet_temp_temp.getString(2));
+                        photoArrayList.add(photo);
+                    }
+                    album.setPhotos(photoArrayList);
+
+                    /**
+                     * 查询相关评论
+                     */
+                    sql = "select username,comment from comment where albumid = ?";
+                    preparedStatement = connection.prepareStatement(sql);
+                    preparedStatement.setInt(1, album.getId());
+                    ResultSet resultSet_comment = preparedStatement.executeQuery();
+                    ArrayList<Comment> commentArrayList = new ArrayList<>();
+                    while (resultSet_comment.next()) {
+                        Comment comment = new Comment(album.getId(), resultSet_comment.getString(2), resultSet_comment.getString(1));
+                        commentArrayList.add(comment);
+                    }
+                    album.setComments(commentArrayList);
+
+                    albumArrayList.add(album);
+                }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        closeParaResources();
+        return albumArrayList;
+    }
+    /**
+     * 根据相册id删除相册、图片、评论
+     */
+    public void deleteAlbumsByAlbumId(int albumId){
+        try {
+            connection = DBUtil.getConnection();
+            sql = "delete from album where id = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, albumId);
+            preparedStatement.execute();
+            sql = "delete from photo where albumid = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, albumId);
+            preparedStatement.execute();
+            sql = "delete from comment where albumid = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, albumId);
+            preparedStatement.execute();
+            closeResources();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
