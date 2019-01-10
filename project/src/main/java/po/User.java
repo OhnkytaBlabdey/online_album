@@ -65,4 +65,10 @@ public class User {
         this.password = password;
         this.nickName = nickName;
     }
+	public boolean isNotValid() {
+		return userName.length()>10 || 
+				password.length()<6 ||
+				nickName.length() <5
+				;
+	}
 }
