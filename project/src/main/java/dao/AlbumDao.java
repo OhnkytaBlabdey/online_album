@@ -100,6 +100,10 @@ public class AlbumDao {
         }
         closeResources();
     }
+    
+    public void deleteAlbum(int albumid) {
+    	
+    }
 
     /**
      * 根据id查询
