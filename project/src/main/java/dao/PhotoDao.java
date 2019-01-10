@@ -74,7 +74,7 @@ public class PhotoDao {
     /**
      * 根据相册id查询图片返回数组
      */
-    public ArrayList<Photo> findPhtotsByAlbumId(String id){
+    public ArrayList<Photo> findPhtotsByAlbumId(int id){
         ArrayList<Photo> photoArrayList = new ArrayList<Photo>();
         try {
             connection = DBUtil.getConnection();
@@ -84,7 +84,7 @@ public class PhotoDao {
         sql = "select albumid,photopath from photo where albumid = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, Integer.parseInt(id));
+            preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 Photo photo = new Photo(Integer.parseInt(resultSet.getString(1)), resultSet.getString(2));
