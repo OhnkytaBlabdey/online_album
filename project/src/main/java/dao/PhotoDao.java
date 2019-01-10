@@ -1,16 +1,13 @@
 package dao;
 
-import db.DBUtil;
-import po.Comment;
-import po.Photo;
-import po.User;
-import utility.Global;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
+import db.DBUtil;
+import po.Photo;
+import utility.Global;
 
 public class PhotoDao {
     private PreparedStatement preparedStatement = null;

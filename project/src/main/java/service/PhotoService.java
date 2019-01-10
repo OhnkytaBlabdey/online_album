@@ -1,7 +1,5 @@
 package service;
 
-import java.util.ArrayList;
-
 import dao.PhotoDao;
 import po.Photo;
 
