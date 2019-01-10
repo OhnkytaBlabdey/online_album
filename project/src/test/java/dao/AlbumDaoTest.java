@@ -16,4 +16,12 @@ public class AlbumDaoTest {
     public void  findAll(){
         System.out.println(albumDao.findAllAlbums(0));
     }
+    @Test
+    public void findByUserId(){
+        System.out.println(albumDao.findAllAlbumsByUserName("didi"));
+    }
+    @Test
+    public void delete(){
+        albumDao.deleteAlbumsByAlbumId(5);
+    }
 }

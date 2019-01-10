@@ -55,11 +55,11 @@ public class UserDao {
      * */
     public User findByUserName(String username){
         try {
-            connection = dbUtil.getConnection();
+            connection = DBUtil.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        sql = "select username,psw,nickname from user where username = ?";
+        sql = "select name,psw,nickname from user where name = ?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
@@ -80,11 +80,11 @@ public class UserDao {
      */
     public void addUser(User user){
         try {
-            connection = dbUtil.getConnection();
+            connection = DBUtil.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        sql = "insert into user (username,psw,nickname) values(?,?,?)";
+        sql = "insert into user (name,psw,nickname) values(?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getUserName());

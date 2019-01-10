@@ -55,7 +55,7 @@ public class FileUploadServlet extends HttpServlet {
 			
 
 		//TODO initialize configuration
-		Global.conf_path=request.getServletContext().getRealPath("./WEB-INF/classes/system.conf");
+		Global.conf_path=request.getServletContext().getRealPath(Global.conf);
 //		Global.conf_path="./system.conf";
 		 
 		// 指定文件上传存储路径
@@ -86,8 +86,11 @@ public class FileUploadServlet extends HttpServlet {
 			String header = part.getHeader("content-disposition");
 			// 获取文件名
 			String fileName = getFileName(header);
+			String absolutePath = savePath + File.separator + fileName;
+
 			// 把文件写到指定路径
-			part.write(savePath + File.separator + fileName);
+			part.write(absolutePath);
+			
 		} else { // 一次性上传多个文件
 			for (Part part : parts) { // 循环处理上传的文件
 				// 获取请求头，请求头的格式：form-data; name="file"; filename="abc.jpg"

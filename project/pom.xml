@@ -30,18 +30,21 @@
 	  <scope>test</scope>
 
 	</dependency>
-	  <!-- https://mvnrepository.com/artifact/jstl/jstl -->
-	  <dependency>
-		  <groupId>jstl</groupId>
-		  <artifactId>jstl</artifactId>
-		  <version>1.2</version>
-	  </dependency>
+	 <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+
+	  
 	  <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 	  <dependency>
 		  <groupId>mysql</groupId>
 		  <artifactId>mysql-connector-java</artifactId>
 		  <version>8.0.13</version>
 	  </dependency>
+	  
 
   </dependencies>
 
@@ -58,7 +61,7 @@
 		<resource>
 			<directory>src/main/webapp</directory>
 			<includes>
-				<include>storage/*</include>
+				<include>/storage/*</include>
 			</includes>
 		</resource>
 	</resources>

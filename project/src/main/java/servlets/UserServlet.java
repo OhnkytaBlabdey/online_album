@@ -2,6 +2,7 @@ package servlets;
 
 import po.User;
 import service.UserService;
+import utility.Global;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "user")
+@WebServlet("/UserServlet")
 public class UserServlet extends HttpServlet {
     /**
 	 * 
@@ -25,6 +26,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Global.conf_path=request.getServletContext().getRealPath(Global.conf);
         String method = request.getParameter("method");
         System.out.println(method);
         response.setCharacterEncoding("utf-8");
@@ -62,7 +64,7 @@ public class UserServlet extends HttpServlet {
             out.print("<script>"
                     + "window.location.href='"
                     + request.getContextPath()
-                    + "/index.jsp';"
+                    + "/ImagesServlet?method=findall&pageNumber=0';"
                     + "</script>");
         }
     }
@@ -97,7 +99,7 @@ public class UserServlet extends HttpServlet {
         out.print("<script>"
                 + "window.location.href='"
                 + request.getContextPath()
-                + "/index.jsp';"
+                + "/ImagesServlet?method=findall&pageNumber=0';"
                 + "</script>");
     }
 
