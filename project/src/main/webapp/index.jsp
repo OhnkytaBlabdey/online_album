@@ -1,6 +1,7 @@
 <%@ page import="po.Album" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="po.Comment" %>
+<%@ page import="po.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -29,7 +30,7 @@
 			<a href="${pageContext.request.contextPath}/UserServlet?method=logout" class="logout after_login">
 				<span>注销</span>
 			</a>
-			<a href="${pageContext.request.contextPath}/PersonalIndex.jsp" class="info after_login">
+			<a href="${pageContext.request.contextPath}/ImagesServlet?method=findallbyusername&username=<%=((User)(session.getAttribute("userInfo"))).getUserName()%>" class="info after_login">
 				<img src="imageSources/after_login.jpg" alt="">
 				<span>个人主页</span>
 			</a>

@@ -10,6 +10,6 @@ public class AlbumServiceTest {
     AlbumService albumService = new AlbumService();
     @Test
     public void findByAlbumIdService() {
-
+        System.out.println(albumService.findAllAlbumsByUserName("root"));
     }
 }

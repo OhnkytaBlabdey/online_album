@@ -2,6 +2,7 @@ package servlets;
 
 import po.Album;
 import po.Photo;
+import po.User;
 import service.AlbumService;
 import utility.ImageUtil;
 
@@ -32,8 +33,8 @@ public class ImagesServlet extends HttpServlet {
             int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
             albumArrayList = albumService.findAllAlbums(pageNumber);
             session.setAttribute("albumArrayList", albumArrayList);
-            System.out.println(albumArrayList);
             response.sendRedirect(request.getContextPath() + "/index.jsp");
+
         }else if (method.equals("findbylocation")){
             int location = Integer.parseInt(request.getParameter("location"));
             ArrayList<Album> albumArrayList_temp = (ArrayList<Album>) session.getAttribute("albumArrayList");
@@ -48,6 +49,39 @@ public class ImagesServlet extends HttpServlet {
             if (null != imgPath && !"".equals(imgPath.trim())) {
                 ImageUtil.showImage(response,outImg, imgPath, true);
             }
+        }else if(method.equals("findallbyusername")){
+            String userName = ((User)(session.getAttribute("userInfo"))).getUserName();
+            ArrayList<Album> albumArrayListByUserName = albumService.findAllAlbumsByUserName(userName);
+            System.out.println(albumArrayListByUserName);
+            session.setAttribute("albumArrayListByUserName", albumArrayListByUserName);
+            response.sendRedirect(request.getContextPath() + "/PersonalIndex.jsp");
+        }else if(method.equals("deleteAlbumById")){
+            int albumId = Integer.parseInt(request.getParameter("albumId"));
+            albumService.deleteAlbumByAlbumId(albumId);
+            response.sendRedirect(request.getContextPath() + "/ImagesServlet?method=findallbyusername");
+        }else if(method.equals("findSingleAlbumbylocation")){
+            int location = Integer.parseInt(request.getParameter("location"));
+            ArrayList<Album> albumArrayList_temp = (ArrayList<Album>) session.getAttribute("albumArrayListByUserName");
+
+            Album album = albumArrayList_temp.get(location);
+            Photo photo = album.getPhotos().get(0);
+
+            String imgPath = photo.getPhotoPath();
+
+            imgPath = getServletContext().getRealPath(imgPath);
+            OutputStream outImg=response.getOutputStream();
+            if (null != imgPath && !"".equals(imgPath.trim())) {
+                ImageUtil.showImage(response,outImg, imgPath, true);
+            }
+        }else if(method.equals("setAlbum")){
+            int location = Integer.parseInt(request.getParameter("location"));
+            ArrayList<Album> albumArrayList_temp = (ArrayList<Album>) session.getAttribute("albumArrayList");
+
+
+            Album album = albumArrayList_temp.get(location);
+            session.removeAttribute("album");
+            session.setAttribute("album", album);
+            response.sendRedirect(request.getContextPath() + "/DisplayImages.jsp");
         }
     }
 
