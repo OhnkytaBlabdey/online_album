@@ -30,7 +30,7 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		Global.conf_path=request.getServletContext().getRealPath("./WEB-INF/classes/system.conf");
+		Global.conf_path=request.getServletContext().getRealPath(Global.conf);
 		// 可以从请求字符串中获取要显示的图片名
 		String imgId = (String) request.getParameter("id");
 		String imgFormat=(String)request.getParameter("format");
