@@ -30,5 +30,9 @@
     <filter-name>CommentFilter</filter-name>
     <filter-class>filters.CommentFilter</filter-class>
   </filter>
+  <filter>
+    <filter-name>IndexFilter</filter-name>
+    <filter-class>filters.IndexFilter</filter-class>
+  </filter>
 
 </web-app>

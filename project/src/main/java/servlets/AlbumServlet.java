@@ -27,7 +27,7 @@ public class AlbumServlet extends HttpServlet {
             HttpSession session = request.getSession();
             String userName = ((User)session.getAttribute("userInfo")).getUserName();
             albumService.addAlbumService(userName, album);
-            response.sendRedirect(request.getContextPath() + "/ImagesServlet?method=findallbyusername");
+            request.getRequestDispatcher("/ImagesServlet?method=findallbyusername").forward(request, response);
         }
     }
 
