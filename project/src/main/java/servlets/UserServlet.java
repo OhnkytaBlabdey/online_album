@@ -41,12 +41,16 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void logIn(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = new User();
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+    	User user = new User();
         user.setUserInfo(request.getParameter("username"), request.getParameter("password"));
         String result = userService.logInService(user);
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         if (result.equals("no_account")) {
+        	System.err.println(result);
             out.print("<script>"
                     + "alert('用户名不存在!');"
                     + "window.location.href='"

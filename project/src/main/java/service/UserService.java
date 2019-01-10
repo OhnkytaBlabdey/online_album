@@ -36,10 +36,14 @@ public class UserService {
 //        if(!user_temp.isEmpty())
     	if(userDao.userNameTaken(user.getUserName() ) )
         {
-    		System.err.println("this user name has been taken, cannot register");
+    		System.err.println("[UserService]:\\tthis user name has been taken, cannot register");
 //        	System.err.println(user_temp +" exist in db.");
         	return "failed";
         }
+    	else if(user.isNotValid()) {
+    		System.err.println("[UserService]:\tuser info invalid");
+    		return "falied";
+    	}
         System.out.println(user);
         userDao.addUser(user);
 
