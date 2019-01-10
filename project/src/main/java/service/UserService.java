@@ -32,8 +32,16 @@ public class UserService {
      * 注册服务
      */
     public String registorService(User user){
-        User user_temp = findByUserNameService(user.getUserName());
-        System.out.println(user_temp);
+//        User user_temp = findByUserNameService(user.getUserName());
+//        if(!user_temp.isEmpty())
+    	if(userDao.userNameTaken(user.getUserName() ) )
+        {
+    		System.err.println("this user name has been taken, cannot register");
+//        	System.err.println(user_temp +" exist in db.");
+        	return "failed";
+        }
+        System.out.println(user);
+        userDao.addUser(user);
 
         return "success";
     }

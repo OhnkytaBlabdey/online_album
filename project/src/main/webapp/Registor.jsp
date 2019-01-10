@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="opt">
-                        <input type="text" class="nickname input" id="nickname" placeholder="请输入昵称">
+                        <input type="text" class="nickname input" id="nickname" name="nickname" placeholder="请输入昵称">
                         <div class="nickname sel">
                             <div class="pic"></div>
                             <span>请输入一个长度为4-10的英文昵称</span>
