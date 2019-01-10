@@ -56,7 +56,7 @@ public class CommentFilter implements Filter {
 		}
 		else {
 			HttpServletResponse resp=(HttpServletResponse) response;
-			resp.sendRedirect("./Login.jsp");
+			resp.sendRedirect("./LogIn.jsp");
 			return;
 		}
 

@@ -84,7 +84,7 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        sql = "insert into user (username,psw,nickname) values(?,?,?)";
+        sql = "insert into user (name,psw,nickname) values(?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, user.getUserName());
