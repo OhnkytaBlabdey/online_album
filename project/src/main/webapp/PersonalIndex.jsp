@@ -27,10 +27,12 @@
 	</div>
 	--%>
 	<div class="comment_form clearfix">
-									<%--
-									提交评论--%>
+									<%--提交评论--%>
 									<form action="./comment">
-										<textarea name="input_comment" class="input_comment" cols="90" rows="5" class="line" placeholder="留下你的足迹111"></textarea>
+									<%
+									request.getSession().setAttribute("username", "name4");
+									%>
+										<textarea name="input_comment" class="input_comment" cols="90" rows="5" class="line" placeholder="留下你的足迹111<%=request.getAttribute("username") %>"></textarea>
 										<input type="submit" class="line submit" value="评论">
 									</form>
 								</div>
