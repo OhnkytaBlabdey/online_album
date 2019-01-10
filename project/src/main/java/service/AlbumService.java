@@ -21,4 +21,10 @@ public class AlbumService {
     public ArrayList<Album> findAllAlbums(int location){
         return albumDao.findAllAlbums(location);
     }
+    public ArrayList<Album> findAllAlbumsByUserName(String userName){
+        return albumDao.findAllAlbumsByUserName(userName);
+    }
+    public void deleteAlbumByAlbumId(int id){
+        albumDao.deleteAlbumsByAlbumId(id);
+    }
 }

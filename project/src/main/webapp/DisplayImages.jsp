@@ -6,7 +6,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>PersonalIndex</title>
+    <title>Display</title>
     <link rel="stylesheet" href="./css/init.css">
     <link rel="stylesheet" href="./css/Index_css.css">
 </head>
@@ -34,7 +34,6 @@
             <span>新建相册</span>
         </a>
     </c:if>
-
 
 </div>
 <div id="container">
@@ -72,15 +71,15 @@
                         </div>
                         <div class="right">
                             <div class="img_title">
-                                <h3><a href="${pageContext.request.contextPath}/ImagesServlet?method=setAlbum&location=${location}"><%=album.getName()%></a></h3>
+                                <h3><%=album.getName()%></h3>
                                 <span class="time"><%=album.getUserName()%></span>
-                                <%--删除--%>
+                                    <%--删除--%>
                                 <div id="delete">
                                     <a href="${pageContext.request.contextPath}/ImagesServlet?method=deleteAlbumById&albumId=<%=album.getId()%>">
                                         <img src="imageSources/delete.png" alt="">
                                     </a>
                                 </div>
-                                <%--删除--%>
+                                    <%--删除--%>
                             </div>
                             <c:if test="<%=!album.getPhotos().isEmpty()%>">
                                 <div class="img_content clearfix">
@@ -152,6 +151,7 @@
         </div>
     </div>
 </div>
-
 </body>
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./js/Index_js.js"></script>
 </html>
