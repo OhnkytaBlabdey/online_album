@@ -29,6 +29,7 @@ public class UserServlet extends HttpServlet {
         Global.conf_path=request.getServletContext().getRealPath(Global.conf);
         String method = request.getParameter("method");
         System.out.println(method);
+        request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         if (method.equals("login")) {
             logIn(request, response);
@@ -70,7 +71,10 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = new User();
+    	request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+    	User user = new User();
         user.setUserInfo(request.getParameter("username"), request.getParameter("password"), request.getParameter("nickname"));
         String result = userService.registorService(user);
         PrintWriter out = response.getWriter();
