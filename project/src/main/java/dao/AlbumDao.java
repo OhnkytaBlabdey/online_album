@@ -155,13 +155,12 @@ public class AlbumDao {
      * 查询所有
      * @throws SQLException 
      */
-    public ArrayList<Album> findAllAlbums(int location) throws SQLException{
+    public ArrayList<Album> findAllAlbums(int location) {
         ArrayList<Album> albumArrayList = new ArrayList<>();
-//        try {
+        try {
             connection = DBUtil.getConnection();
             sql = "select * from album";
             preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setInt(1, location);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 Album album = new Album();
@@ -212,15 +211,15 @@ public class AlbumDao {
             }
 
 
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         closeParaResources();
-//        try {
+        try {
             resultSet_temp.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return albumArrayList;
     }
     /**

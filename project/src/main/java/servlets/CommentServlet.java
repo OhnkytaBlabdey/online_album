@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import po.Comment;
+import service.CommentService;
+
 /**
  * Servlet implementation class CommentServlet
  */
@@ -32,12 +35,18 @@ public class CommentServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter writer=response.getWriter();
-		String comment= (String) request.getParameter("input_comment");
-//		String username=null;
-//		String albumid=null;
-		writer.println("comment  "+comment);
-		writer.append("Served at: ").append(request.getContextPath());
+		PrintWriter out = response.getWriter();
+
+		try {
+		String comment_text= (String) request.getParameter("input_comment");
+		out.println(comment_text);
+		Comment comment=new Comment(1,comment_text,"user");
+		CommentService service = new CommentService();
+		service.addComment(comment);
+		}catch (Exception e) {
+			e.printStackTrace(out);
+		}
+
 	}
 
 	/**

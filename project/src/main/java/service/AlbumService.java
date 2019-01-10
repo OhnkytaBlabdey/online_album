@@ -14,7 +14,7 @@ public class AlbumService {
     public Album[] findTenAlbum(){
         return null;
     }
-    public ArrayList<Album> findAllAlbums(int location) throws SQLException{
+    public ArrayList<Album> findAllAlbums(int location){
         return albumDao.findAllAlbums(location);
     }
     public ArrayList<Album> findAllAlbumsByUserName(String userName){
