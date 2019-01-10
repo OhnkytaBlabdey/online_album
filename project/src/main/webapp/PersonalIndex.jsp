@@ -55,6 +55,7 @@
                 ArrayList<Album> albumArrayListByUserName = new ArrayList<>();
                 albumArrayListByUserName = (ArrayList<Album>) session.getAttribute("albumArrayListByUserName");
             %>
+            <c:if test="${sessionScope.albumArrayListByUserName !=null}">
             <c:if test="<%=!albumArrayListByUserName.isEmpty()%>">
                 <%
                 %>
@@ -147,6 +148,7 @@
                         </div>
                     </div>
                 </c:forEach>
+            </c:if>
             </c:if>
             <%--单个模块截至--%>
         </div>
