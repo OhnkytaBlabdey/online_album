@@ -14,7 +14,6 @@ public class AlbumService {
      * 根据相册id查询
      */
     private AlbumDao albumDao = new AlbumDao();
-    private PhotoDao photoDao = new PhotoDao();
     public Album[] findTenAlbum(){
         return null;
     }

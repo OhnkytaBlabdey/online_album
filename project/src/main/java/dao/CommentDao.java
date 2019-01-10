@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import db.DBUtil;
 import po.Comment;
@@ -12,7 +13,6 @@ import utility.Global;
 public class CommentDao {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    private ResultSet resultSet_temp = null;
     String sql = null;
     Connection connection = null;
     /**
@@ -67,6 +67,25 @@ public class CommentDao {
          }
          closeParaResources();
     	return comment;
+    }
+    public ArrayList<Comment> getAllCommentByAlbumId(int album_id) {
+    	ArrayList<Comment> comments=new ArrayList<Comment>();
+    	sql="select albumid,comment,username from comment where albumid = ?";
+    	 try {
+             preparedStatement = connection.prepareStatement(sql);
+             preparedStatement.setInt(1, album_id);
+             resultSet = preparedStatement.executeQuery();
+             while (resultSet.next()) {
+                 comments.add(new Comment(album_id,
+                		 resultSet.getString("comment"),
+                		 resultSet.getString("username"))
+                		 );
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         closeParaResources();
+    	return comments;
     }
     
     public void addComment(Comment comment_t) {
@@ -124,8 +143,8 @@ public class CommentDao {
     public static void main(String[] args) {
     	Global.conf_path="C:\\Users\\peace\\Desktop\\Java\\system.conf";
 		CommentDao dao=new CommentDao();
-//		dao.addComment(new Comment(4,"blabla","user none"));
+		dao.addComment(new Comment(6,"blabla","user none"));
 //		dao.deleteComment(1);
-		dao.deleteAlbumComment(1);
+//		dao.deleteAlbumComment(1);
 	}
 }
