@@ -96,7 +96,7 @@ public class FileUploadServlet extends HttpServlet {
 			int albumId = ((Album)session.getAttribute("album")).getId();
 			photo.setAlbumId(albumId);
 			photoService.addPhoto(photo);
-			response.sendRedirect(request.getContextPath() + "/ImagesServlet?method=findall&pageNumber=0");
+            request.getRequestDispatcher("/ImagesServlet?method=findall&pageNumber=0").forward(request, response);
 		} else { // 一次性上传多个文件
 			for (Part part : parts) { // 循环处理上传的文件
 				// 获取请求头，请求头的格式：form-data; name="file"; filename="abc.jpg"
