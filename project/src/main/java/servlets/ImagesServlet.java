@@ -1,11 +1,8 @@
 package servlets;
 
-import po.Album;
-import po.Photo;
-import po.User;
-import service.AlbumService;
-import utility.Global;
-import utility.ImageUtil;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
+
+import po.Album;
+import po.Photo;
+import po.User;
+import service.AlbumService;
+import utility.Global;
+import utility.ImageUtil;
 
 @WebServlet("/ImagesServlet")
 public class ImagesServlet extends HttpServlet {
 
-    public AlbumService albumService = new AlbumService();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public AlbumService albumService = new AlbumService();
     ArrayList<Album> albumArrayList = new ArrayList<>();
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @SuppressWarnings("unchecked")
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Global.conf_path=request.getServletContext().getRealPath(Global.conf);
         response.setCharacterEncoding("utf-8");
         request.setCharacterEncoding("utf-8");

@@ -1,13 +1,9 @@
 package service;
 
-import dao.AlbumDao;
-import dao.PhotoDao;
-import po.Album;
-import po.Photo;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import dao.AlbumDao;
+import po.Album;
 
 public class AlbumService {
     /**
